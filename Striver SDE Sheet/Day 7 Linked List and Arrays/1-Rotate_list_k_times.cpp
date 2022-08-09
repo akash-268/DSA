@@ -39,6 +39,8 @@ ListNode *rotateRight(ListNode *head, int k)
     }
     return head;
 }
+
+// one more method is to find out length of list and make the next of(len-k)th node to null and join last node to 1st node
 void solve()
 {
 }
