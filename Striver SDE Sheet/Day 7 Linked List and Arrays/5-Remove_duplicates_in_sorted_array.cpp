@@ -13,13 +13,26 @@ struct ListNode
 };
 int removeDuplicates(vector<int> &nums)
 {
-    map<int, int> mp;
-    for (auto it : nums)
-        mp[it]++;
-    nums.clear();
-    for (auto it : mp)
-        nums.push_back(it.first);
-    return mp.size();
+    // map<int, int> mp;
+    // for (auto it : nums)
+    //     mp[it]++;
+    // nums.clear();
+    // for (auto it : mp)
+    //     nums.push_back(it.first);
+    // return mp.size();
+
+    if (nums.size() == 0)
+        return {};
+    int j = 0;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (nums[j] != nums[i])
+        {
+            nums[j + 1] = nums[i];
+            j++;
+        }
+    }
+    return j + 1;
 }
 void solve()
 {
