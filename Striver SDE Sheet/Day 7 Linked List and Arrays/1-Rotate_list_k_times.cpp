@@ -15,6 +15,15 @@ ListNode *rotateRight(ListNode *head, int k)
 {
     if (!head || !head->next)
         return head;
+    int c = 1;
+    ListNode *ptr = head;
+    while (ptr->next)
+    {
+        c++;
+        ptr = ptr->next;
+    }
+    if (k > c)
+        k = k % c;
     while (k--)
     {
         ListNode *nex = head->next;
