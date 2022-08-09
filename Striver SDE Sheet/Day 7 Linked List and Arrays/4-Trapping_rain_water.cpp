@@ -14,24 +14,29 @@ struct ListNode
 int trap(vector<int> &arr)
 {
     int n = arr.size();
-    vector<int> left(n);
-    vector<int> right(n);
-    left[0] = arr[0];
-    right[n - 1] = arr[n - 1];
-    for (int i = 1; i < n; i++)
+    int left = 0, right = n - 1;
+    int res = 0;
+    int maxLeft = 0, maxRight = 0;
+    while (left <= right)
     {
-        left[i] = max(left[i - 1], arr[i]);
+        if (arr[left] <= arr[right])
+        {
+            if (arr[left] >= maxLeft)
+                maxLeft = arr[left];
+            else
+                res += maxLeft - arr[left];
+            left++;
+        }
+        else
+        {
+            if (arr[right] >= maxRight)
+                maxRight = arr[right];
+            else
+                res += maxRight - arr[right];
+            right--;
+        }
     }
-    for (int i = n - 2; i >= 0; i--)
-    {
-        right[i] = max(right[i + 1], arr[i]);
-    }
-    int sum = 0;
-    for (int i = 0; i < n; i++)
-    {
-        sum += min(left[i], right[i]) - arr[i];
-    }
-    return sum;
+    return res;
 }
 void solve()
 {
@@ -40,7 +45,7 @@ void solve()
     vector<int> v(n);
     for (int i = 0; i < n; i++)
         cin >> v[i];
-    cout<<trap(v);
+    cout << trap(v);
 }
 
 int main()
