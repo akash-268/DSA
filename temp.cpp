@@ -3,26 +3,30 @@ using namespace std;
 typedef long long int ll;
 // JAI SHREE RAM
 // HAR HAR MAHADEV
-int f(vector<int>&v,int k){
-    int sum=0,maxi=INT_MIN;
-    for(int i=0;i<k;i++) sum+=v[i];
-    maxi=max(maxi,sum);
-    int i=0;
-    while(k<v.size()){
-        sum-=v[i];
-        sum+=v[k];
-        maxi=max(sum,maxi);
-        // cout<<maxi<<" ";
-        i++;k++;
+void solve()
+{
+    ll n;
+    cin >> n;
+    vector<ll> v;
+    map<ll, ll> mp;
+    for (int i = 0; i < n; i++)
+    {
+        int x;
+        cin >> x;
+        mp[x]++;
     }
-    return maxi;
-}
-void solve(){
-    int n;cin>>n;
-    vector<int>v(n);
-    for(int i=0;i<n;i++) cin>>v[i];
-    int k;cin>>k;
-    cout<<f(v,k);
+    for (auto it : mp)
+        v.push_back(it.second);
+    if (v.size() == 1)
+    {
+        cout << "YES" << endl;
+        return;
+    }
+    sort(v.begin(), v.end());
+    if (v[v.size() - 1] > v[v.size() - 2])
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 }
 
 int main()
@@ -31,7 +35,7 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
     {
         solve();
