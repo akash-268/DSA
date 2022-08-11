@@ -20,10 +20,6 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
-TreeNode *sortedArrayToBST(vector<int> &nums)
-{
-    return helper(nums, 0, nums.size() - 1);
-}
 TreeNode *helper(vector<int> &nums, int low, int high)
 {
     if (low <= high)
@@ -35,6 +31,10 @@ TreeNode *helper(vector<int> &nums, int low, int high)
         return root;
     }
     return NULL;
+}
+TreeNode *sortedArrayToBST(vector<int> &nums)
+{
+    return helper(nums, 0, nums.size() - 1);
 }
 void solve()
 {
