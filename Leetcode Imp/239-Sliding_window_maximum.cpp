@@ -73,7 +73,11 @@ void solve()
     vector<int> v(n);
     for (int i = 0; i < n; i++)
         cin >> v[i];
-    
+    vector<int> res = maxSlidingWindow(v, k);
+    for (auto it : res)
+    {
+        cout << it << " ";
+    }
 }
 
 int main()
