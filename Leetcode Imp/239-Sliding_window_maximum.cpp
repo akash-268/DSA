@@ -38,8 +38,42 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
+vector<int> maxSlidingWindow(vector<int> &a, int k)
+{
+    vector<int> ans;
+    int i = 0, j = 0;
+    list<int> l;
+    while (j < a.size())
+    {
+        if (l.empty())
+            l.push_back(a[j]);
+        else
+        {
+            while (!l.empty() && l.back() < a[j])
+                l.pop_back();
+            l.push_back(a[j]);
+        }
+        if (j - i + 1 < k)
+            j++;
+        else if (j - i + 1 == k)
+        {
+            ans.push_back(l.front());
+            if (a[i] == l.front())
+                l.pop_front();
+            i++;
+            j++;
+        }
+    }
+    return ans;
+}
 void solve()
 {
+    int n, k;
+    cin >> n >> k;
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
+        cin >> v[i];
+    
 }
 
 int main()
