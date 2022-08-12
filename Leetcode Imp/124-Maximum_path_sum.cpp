@@ -43,8 +43,8 @@ int fun(TreeNode *root, int maxi)
 {
     if (!root)
         return 0;
-    int lh = fun(root->left, maxi);
-    int rh = fun(root->right, maxi);
+    int lh = max(0, fun(root->left, maxi));
+    int rh = max(0, fun(root->right, maxi));
     maxi = max(maxi, lh + rh + root->val);
     return root->val + max(lh, rh);
 }
