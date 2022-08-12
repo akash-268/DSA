@@ -21,25 +21,28 @@ const int maxi = 1e5 + 5;
 const ll mod = 1e9 + 7;
 const ll inf = 1e9;
 const ll eps = 1e-9;
-struct ListNode
+int findMinimumCoins(int amount)
 {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
-struct TreeNode
-{
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
+    vector<int> den = {1000, 500, 100, 50, 20, 10, 5, 2, 1};
+    int c = 0, i = 0;
+    while (amount != 0)
+    {
+        if (amount >= den[i])
+        {
+            c++;
+            cout<<den[i]<<" ";
+            amount -= den[i];
+        }
+        else
+            i++;
+    }
+    cout<<endl;
+    return c;
+}
 void solve()
 {
+    int n;cin>>n;
+    cout<<findMinimumCoins(n);
 }
 
 int main()
