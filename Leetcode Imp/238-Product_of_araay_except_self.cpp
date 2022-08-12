@@ -38,8 +38,29 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
+vector<int> productExceptSelf(vector<int> &nums)
+{
+    int n=nums.size();
+    int p = 1, c0 = count(begin(nums), end(nums), 0);
+    if (c0 > 1)
+        return vector<int>(n);
+    for (auto c : nums)
+        if (c != 0)
+            p *= c;
+    for (auto &c : nums)
+        if (c0)
+            c = c ? 0 : p;
+        else
+            c = p / c;
+    return nums;
+}
 void solve()
 {
+    int n;cin>>n;
+    vector<int> v(n);
+    vin;
+    vector<int> res=productExceptSelf(v);
+    for(auto it :res) cout<<it<<" ";
 }
 
 int main()
