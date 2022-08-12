@@ -55,14 +55,7 @@ vector<int> maxSlidingWindow(vector<int> &a, int k)
         }
         if (j - i + 1 < k)
             j++;
-        else if (j - i + 1 == k)
-        {
-            ans.push_back(l.front());
-            if (a[i] == l.front())
-                l.pop_front();
-            i++;
-            j++;
-        }
+        
     }
     return ans;
 }
