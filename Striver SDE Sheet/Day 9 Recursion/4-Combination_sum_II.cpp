@@ -62,8 +62,29 @@ vector<vector<int>> combinationSum2(vector<int> &arr, int sum)
     solve(0, sum, arr, ans, temp);
     return ans;
 }
-void solve()
+void fun()
 {
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    f(i, 0, n) cin >> v[i];
+    int sum;
+    cin >> sum;
+    vector<vector<int>> res = combinationSum2(v, sum);
+    for (auto it : res)
+    {
+        cout << "[";
+        for (int i = 0; i < it.size(); i++)
+        {
+            if (i == it.size() - 1)
+            {
+                cout << it[i];
+            }
+            else
+                cout << it[i] << ",";
+        }
+        cout << "] ";
+    }
 }
 
 int main()
@@ -75,6 +96,6 @@ int main()
     // cin >> t;
     while (t--)
     {
-        solve();
+        fun();
     }
 }
