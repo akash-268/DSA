@@ -36,6 +36,32 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
+void solve(int id, int sum, vector<int> &arr, vector<vector<int>> &ans, vector<int> &temp)
+{
+    if (sum == 0)
+    {
+        ans.push_back(temp);
+        return;
+    }
+    for (int i = id; i < arr.size(); i++)
+    {
+        if (arr[i] > sum)
+            break;
+        if (i > id && arr[i] == arr[i - 1])
+            continue;
+        temp.push_back(arr[i]);
+        solve(i + 1, sum - arr[i], arr, ans, temp);
+        temp.pop_back();
+    }
+}
+vector<vector<int>> combinationSum2(vector<int> &arr, int sum)
+{
+    sort(arr.begin(), arr.end());
+    vector<vector<int>> ans;
+    vector<int> temp;
+    solve(0, sum, arr, ans, temp);
+    return ans;
+}
 void solve()
 {
 }
