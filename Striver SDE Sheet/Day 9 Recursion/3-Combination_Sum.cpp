@@ -61,6 +61,28 @@ vector<vector<int>> combinationSum(vector<int> &nums, int target)
 }
 void solve()
 {
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
+        cin >> v[i];
+    int k;
+    cin >> k;
+    vector<vector<int>> res = combinationSum(v, k);
+    for (auto it : res)
+    {
+        cout << "[";
+        for (int i = 0; i < it.size(); i++)
+        {
+            if (i == it.size() - 1)
+            {
+                cout << it[i];
+            }
+            else
+                cout << it[i] << ",";
+        }
+        cout << "] ";
+    }
 }
 
 int main()
