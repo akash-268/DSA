@@ -3,9 +3,7 @@ using namespace std;
 // JAI SHREE RAM
 // HAR HAR MAHADEV
 #define ll long long int
-#define vin                    \
-    for (ll i = 0; i < n; i++) \
-    cin >> v[i]
+#define vin vector<int>
 #define f(i, a, b) for (ll i = a; i < b; i++)
 #define rf(i, a, b) for (ll i = a; i >= b; i--)
 #define mp make_pair
