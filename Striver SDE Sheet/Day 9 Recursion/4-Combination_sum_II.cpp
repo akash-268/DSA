@@ -36,54 +36,8 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
-set<vector<int>> ans;
-void solve(vector<int> arr, int i, vector<int> temp)
-{
-    if (i == arr.size())
-    {
-        sort(temp.begin(), temp.end());
-        ans.insert(temp);
-        return;
-    }
-    solve(arr, i + 1, temp);
-    temp.push_back(arr[i]);
-    solve(arr, i + 1, temp);
-}    
-vector<vector<int>> subsetsWithDup(vector<int> &nums)
-{
-    vector<int> temp;
-    solve(nums, 0, temp);
-    vector<vector<int>> res;
-    for (auto it : ans)
-    {
-        res.push_back(it);
-    }
-    return res;
-}
 void solve()
 {
-    int n;
-    cin >> n;
-    vin v(n);
-    f(i, 0, n)
-    {
-        cin >> v[i];
-    }
-    vector<vector<int>> res = subsetsWithDup(v);
-    for (auto it : res)
-    {
-        cout << "[";
-        for (int i = 0; i < it.size(); i++)
-        {
-            if (i == it.size() - 1)
-            {
-                cout << it[i];
-            }
-            else
-                cout << it[i] << ",";
-        }
-        cout << "] ";
-    }
 }
 
 int main()
