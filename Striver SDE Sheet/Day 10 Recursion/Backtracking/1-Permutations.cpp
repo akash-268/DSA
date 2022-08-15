@@ -59,10 +59,26 @@ vector<vector<int>> permute(vector<int> &nums)
 }
 void solve()
 {
-    int n;cin>>n;
-    vector<int>v(n);
-    f(i,0,n) cin>>v[i];
-    vector<vector<int>>res=permute(v);
+    int n;
+    cin >> n;
+    vector<int> v(n, -1);
+    for (int i = 1; i <= n; i++)
+        v[i - 1] = i;
+    vector<vector<int>> res = permute(v);
+    for (auto it : res)
+    {
+        cout << "[";
+        for (int i = 0; i < it.size(); i++)
+        {
+            if (i == it.size() - 1)
+            {
+                cout << it[i];
+            }
+            else
+                cout << it[i] << ",";
+        }
+        cout << "] ";
+    }
 }
 
 int main()
