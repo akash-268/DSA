@@ -36,8 +36,33 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
+vector<vector<int>> res;
+void solve(int i, vector<int> &nums, vector<int> &ds)
+{
+    if (i == nums.size())
+    {
+        res.push_back(nums);
+        return;
+    }
+    for (int id = i; id < nums.size(); id++)
+    {
+        swap(nums[id], nums[i]);
+        solve(i + 1, nums, ds);
+        swap(nums[id], nums[i]);
+    }
+}
+vector<vector<int>> permute(vector<int> &nums)
+{
+    vector<int> ds;
+    solve(0, nums, ds);
+    return res;
+}
 void solve()
 {
+    int n;cin>>n;
+    vector<int>v(n);
+    f(i,0,n) cin>>v[i];
+    vector<vector<int>>res=permute(v);
 }
 
 int main()
