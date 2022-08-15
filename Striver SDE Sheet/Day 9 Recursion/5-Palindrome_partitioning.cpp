@@ -36,7 +36,42 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
-void solve()
+bool check(string s, int i, int j)
+{
+    while (i < j)
+    {
+        if (s[i] != s[j])
+            return false;
+        i++;
+        j--;
+    }
+    return true;
+}
+void solve(int id, string s, vector<string> ds, vector<vector<string>> &res)
+{
+    if (id == s.size())
+    {
+        res.push_back(ds);
+        return;
+    }
+    for (int i = id; i < s.size(); i++)
+    {
+        if (check(s, id, i))
+        {
+            ds.push_back(s.substr(id, i - id + 1));
+            solve(i + 1, s, ds, res);
+            ds.pop_back();
+        }
+    }
+}
+vector<vector<string>> partition(string s)
+{
+    vector<vector<string>> res;
+    vector<string> ds;
+    solve(0, s, ds, res);
+    return res;
+}
+void fun()
 {
 }
 
@@ -49,6 +84,6 @@ int main()
     // cin >> t;
     while (t--)
     {
-        solve();
+        fun();
     }
 }
