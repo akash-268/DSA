@@ -73,6 +73,23 @@ vector<vector<string>> partition(string s)
 }
 void fun()
 {
+    string s;
+    cin >> s;
+    vector<vector<string>> res = partition(s);
+    for (auto it : res)
+    {
+        cout << "[";
+        for (int i = 0; i < it.size(); i++)
+        {
+            if (i == it.size() - 1)
+            {
+                cout << it[i];
+            }
+            else
+                cout << it[i] << ",";
+        }
+        cout << "] ";
+    }
 }
 
 int main()
