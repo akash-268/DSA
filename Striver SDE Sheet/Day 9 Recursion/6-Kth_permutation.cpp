@@ -39,17 +39,23 @@ struct TreeNode
 string getPermutation(int n, int k)
 {
     vector<int> v;
+    int f = 1;
     for (int i = 1; i <= n; i++)
+    {
         v.push_back(i);
-
-    for (int i = 1; i < k; i++)
-    {
-        next_permutation(v.begin(), v.end());
+        f *= i;
     }
+    f /= v.size();
+    k--;
     string res = "";
-    for (auto it : v)
+    while (1)
     {
-        res += it + '0';
+        res += to_string(v[k / f]);
+        v.erase(v.begin() + k / f);
+        if (v.size() == 0)
+            break;
+        k = k % f;
+        f /= v.size();
     }
     return res;
 }
