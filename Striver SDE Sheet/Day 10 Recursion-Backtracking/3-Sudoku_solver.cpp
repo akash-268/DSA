@@ -80,7 +80,23 @@ void solveSudoku(vector<vector<char>> &board)
 }
 void solve()
 {
-    
+    vector<vector<char>> board(9, vector<char>(9));
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            cin >> board[i][j];
+        }
+    }
+    solveSudoku(board);
+    for (auto it : board)
+    {
+        for (auto i : it)
+        {
+            cout << i << " ";
+        }
+        cout << endl;
+    }
 }
 
 int main()
