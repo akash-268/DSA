@@ -36,50 +36,86 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
-bool isSafe(int row, int col, vector<string> &board)
+// bool isSafe(int row, int col, vector<string> &board)
+// {
+//     int r = row, c = col;
+//     while (r >= 0 && c >= 0)
+//     {
+//         if (board[r][c] == 'Q')
+//             return false;
+//         r--;
+//         c--;
+//     }
+//     r = row, c = col;
+//     while (c >= 0)
+//     {
+//         if (board[r][c] == 'Q')
+//             return false;
+//         c--;
+//     }
+//     r = row, c = col;
+//     while (r < board.size() && c >= 0)
+//     {
+//         if (board[r][c] == 'Q')
+//             return false;
+//         r++;
+//         c--;
+//     }
+//     return true;
+// }
+// void solve(int id, vector<string> &board, vector<vector<string>> &ans, int n)
+// {
+//     if (id == n)
+//     {
+//         ans.push_back(board);
+//         return;
+//     }
+//     for (int i = 0; i < n; i++)
+//     {
+//         if (isSafe(i, id, board))
+//         {
+//             board[i][id] = 'Q';
+//             solve(id + 1, board, ans, n);
+//             board[i][id] = '.';
+//         }
+//     }
+// }
+// vector<vector<string>> solveNQueens(int n)
+// {
+//     vector<vector<string>> ans;
+//     vector<string> board(n);
+//     string s(n, '.');
+//     for (int i = 0; i < n; i++)
+//     {
+//         board[i] = s;
+//     }
+//     solve(0, board, ans, n);
+//     return ans;
+// }
+void solve(int col, vector<string> &board, vector<vector<string>> &ans, vector<int> &leftrow, vector<int> &upperDiagonal, vector<int> &lowerDiagonal, int n)
 {
-    int r = row, c = col;
-    while (r >= 0 && c >= 0)
-    {
-        if (board[r][c] == 'Q')
-            return false;
-        r--;
-        c--;
-    }
-    r = row, c = col;
-    while (c >= 0)
-    {
-        if (board[r][c] == 'Q')
-            return false;
-        c--;
-    }
-    r = row, c = col;
-    while (r < board.size() && c >= 0)
-    {
-        if (board[r][c] == 'Q')
-            return false;
-        r++;
-        c--;
-    }
-    return true;
-}
-void solve(int id, vector<string> &board, vector<vector<string>> &ans, int n)
-{
-    if (id == n)
+    if (col == n)
     {
         ans.push_back(board);
         return;
     }
-    for (int i = 0; i < n; i++)
+    for (int row = 0; row < n; row++)
     {
-        if (isSafe(i, id, board))
+        if (leftrow[row] == 0 && lowerDiagonal[row + col] == 0 && upperDiagonal[n - 1 + col - row] == 0)
         {
-            board[i][id] = 'Q';
-            solve(id + 1, board, ans, n);
-            board[i][id] = '.';
+            board[row][col] = 'Q';
+            leftrow[row] = 1;
+            lowerDiagonal[row + col] = 1;
+            upperDiagonal[n - 1 + col - row] = 1;
+            solve(col + 1, board, ans, leftrow, upperDiagonal, lowerDiagonal, n);
+            board[row][col] = '.';
+            leftrow[row] = 0;
+            lowerDiagonal[row + col] = 0;
+            upperDiagonal[n - 1 + col - row] = 0;
         }
     }
 }
+
 vector<vector<string>> solveNQueens(int n)
 {
     vector<vector<string>> ans;
@@ -89,7 +125,8 @@ vector<vector<string>> solveNQueens(int n)
     {
         board[i] = s;
     }
-    solve(0, board, ans, n);
+    vector<int> leftrow(n, 0), upperDiagonal(2 * n - 1, 0), lowerDiagonal(2 * n - 1, 0);
+    solve(0, board, ans, leftrow, upperDiagonal, lowerDiagonal, n);
     return ans;
 }
 void solve()
