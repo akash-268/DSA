@@ -19,14 +19,6 @@ const int maxi = 1e5 + 5;
 const ll mod = 1e9 + 7;
 const ll inf = 1e9;
 const ll eps = 1e-9;
-struct ListNode
-{
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
 struct TreeNode
 {
     int val;
@@ -36,6 +28,26 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
+void fun(TreeNode *root, int level, vector<int> &ans)
+{
+    if (!root)
+    {
+        return;
+    }
+    if (level == ans.size())
+    {
+        ans.push_back(root->val);
+    }
+    fun(root->left, level + 1, ans);
+    fun(root->right, level + 1, ans);
+}
+vector<int> rightView(TreeNode *root)
+{
+    // Your code here
+    vector<int> ans;
+    fun(root, 0, ans);
+    return ans;
+}
 void solve()
 {
 }
