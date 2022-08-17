@@ -38,8 +38,8 @@ void fun(TreeNode *root, int level, vector<int> &ans)
     {
         ans.push_back(root->val);
     }
-    fun(root->left, level + 1, ans);
     fun(root->right, level + 1, ans);
+    fun(root->left, level + 1, ans);
 }
 vector<int> rightView(TreeNode *root)
 {
