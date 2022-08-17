@@ -39,9 +39,9 @@ struct TreeNode
 vector<int> getTopView(TreeNode *root)
 {
     // Write your code here.
-    vector<int> ans;
+    vector<int> res;
     if (!root)
-        return ans;
+        return res;
     queue<pair<TreeNode *, int>> q;
     map<int, int> mp;
     q.push({root, 0});
@@ -62,9 +62,9 @@ vector<int> getTopView(TreeNode *root)
     }
     for (auto it : mp)
     {
-        ans.push_back(it.second);
+        res.push_back(it.second);
     }
-    return ans;
+    return res;
 }
 void solve()
 {
