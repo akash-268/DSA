@@ -1,3 +1,24 @@
-if (!A)
-    return 0;
-return (A->left ? abs((A->val) - (A->left->val)) < 2 : 0) + (A->right ? abs((A->val) - (A->right->val)) < 2 : 0) + consecutiveNodes(A->left) + consecutiveNodes(A->right);
+Node *temp = head;
+deque<int> d;
+while (temp != NULL)
+{
+    d.push_back(temp->data);
+    temp = temp->next;
+}
+int i = 0;
+temp = head;
+while (!d.empty())
+{
+    if (i % 2 == 1)
+    {
+        temp->data = d.front();
+        d.pop_front();
+    }
+    else
+    {
+        temp->data = d.back();
+        d.pop_back();
+    }
+    i++;
+    temp = temp->next;
+return head;
