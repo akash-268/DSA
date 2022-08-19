@@ -1,87 +1,118 @@
-#include <stdio.h>
-#include <stdlib.h>
+// A C++ program to swap Kth node from beginning with kth
+// node from end
+#include <bits/stdc++.h>
+using namespace std;
 
-struct TNode
+// A Linked List node
+typedef struct Node
 {
-    char data;
-    struct TNode *left;
-    struct Thode *right;
-};
-struct TNode *newNode(char data);
-struct TNode* arrayToTree(char arr[], int start, int end)
+    int data;
+    struct Node *next;
+} Node;
+
+// Utility function to insert a node at the beginning
+void push(Node **head_ref, int new_data)
 {
-    if (start > end)
+    Node *new_node = (Node *)malloc(sizeof(Node));
+    new_node->data = new_data;
+    new_node->next = (*head_ref);
+    (*head_ref) = new_node;
+}
+
+/* Utility function for displaying linked list */
+void printList(Node *node)
+{
+    while (node != NULL)
     {
-        return NULL;
+        cout << node->data << " ";
+        node = node->next;
     }
-    int mid = (start + end) / 2;
-    struct TNode *root = newNode(arr[mid]);
-    root->left = arrayToTree(arr, start, mid - 1);
-    root->right = arrayToTree(arr, mid + 1, end);
-    return root;
-}
-struct TNode* newNode(char data)
-{
-    struct TNode *node = (struct TNode *)malloc(sizeof(struct TNode));
-    node->data = data;
-    node->left = NULL;
-    node->right = NULL;
-    return node;
+    cout << endl;
 }
 
-void preorder(struct TNode *node)
+/* Utility function for calculating
+length of linked list */
+int countNodes(struct Node *s)
 {
-    if (node == NULL)
+    int count = 0;
+    while (s != NULL)
     {
+        count++;
+        s = s->next;
+    }
+    return count;
+}
+
+// Utility function for calculating length of linked list
+void swapKth(struct Node **head_ref, int k)
+{
+    // Count nodes in linked list
+    int n = countNodes(*head_ref);
+    if (n < k)
         return;
-    }
-    printf("%c", node->data);
-    preorder(node->left);
-    preorder(node->right);
-}
-
-void reverseArray(char *arr, int start, int end)
-{
-    while (start < end)
+    if (2 * k - 1 == n)
+        return;
+    Node *x = *head_ref;
+    Node *x_prev = NULL;
+    for (int i = 1; i < k; i++)
     {
-        char x = arr[start];
-        arr[start++] = arr[end];
-        arr[end--] = x;
+        x_prev = x;
+        x = x->next;
     }
+
+    // Similarly, find the kth node from end and its
+    // previous. kth node from end is (n-k+1)th node from
+    // beginning
+    Node *y = *head_ref;
+    Node *y_prev = NULL;
+    for (int i = 1; i < n - k + 1; i++)
+    {
+        y_prev = y;
+        y = y->next;
+    }
+    // If x_prev exists, then new next of it will be y.
+    // Consider the case when y->next is x, in this case,
+    // x_prev and y are same. So the statement "x_prev->next
+    // = y" creates a self loop. This self loop will be
+    // broken when we change y->next.
+    if (x_prev)
+        x_prev->next = y;
+    // Same thing applies to y_prev
+    if (y_prev)
+        y_prev->next = x;
+    int val = x->data + y->data;
+    // Swap next pointers of x and y. These statements also
+    // break self loop if x->next is y or y->next is x
+    x->data = val;
+    y->data = val;
+    Node *temp = x->next;
+    x->next = y->next;
+    y->next = temp;
+    // Change head pointers when k is 1 or n
+    if (k == 1)
+        *head_ref = y;
+    if (k == n)
+        *head_ref = x;
 }
 
-void updateArray(char *arr, int n)
-{
-    int size;
-    for (size = 0; arr[size] != '\0'; ++size)
-        ;
-    reverseArray(arr, e, size - 1);
-    reverseArray(arr, 0, n - 1);
-    reverseArray(arr, n, size - 1);
-}
-
+// Driver program to test above functions
 int main()
 {
-    char arr[] = "eixzs*cvgpa";
-    int n;
-    for (n = 0; arr[n] != '\0'; ++n)
-        ;
-    struct Tnode* root = arrayToTree(arr, 0, n - 1);
-    preorder(root);
-    printf("-");
-    updateArray(arr, 4);
-    root = arrayToTree(arr, 0, n - 2);
-    preorder(root);
-    printf("-");
-
-    updateArray(arr, 2);
-    root = arrayToTree(arr, 0, n - 1);
-    preorder(root);
-    printf("-");
-
-    updateArray(arr, 1);
-    root = arrayToTree(arr, 0, n - 3);
-    preorder(root);
-
+    // Let us create the following linked list for testing
+    // 1->2->3->4->5->6->7->8
+    struct Node *head = NULL;
+    vector<int> v = {1, 2, 5, 11, 13};
+    for (int i = 0; i < v.size(); i++)
+        push(&head, v[i]);
+    cout << "Original Linked List:";
+    printList(head);
+    for (int k = 1; k <= v.size() / 2; k++)
+    {
+        swapKth(&head, k);
+        cout << "\nModified List for k = " << k << endl;
+        printList(head);
+    }
     return 0;
 }
+
+// This code is contributed by Aditya Kumar (adityakumar129)
