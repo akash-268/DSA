@@ -2,37 +2,59 @@
 using namespace std;
 // JAI SHREE RAM
 // HAR HAR MAHADEV
-void check(vector<int> &v)
+void mergeArrays(vector<int> arr1, vector<int> arr2, vector<int> &arr3, int n1, int n2)
 {
-    int c = 0, i;
-    for (i = 1; i < v.size(); i++)
+    int i = 0, j = 0, k = 0;
+
+    // Traverse both array
+    while (i < n1 && j < n2)
     {
-        if (v[i] == v[i - 1])
-            c++;
+        if (arr1[i] < arr2[j])
+            arr3[k++] = arr1[i++];
+        else
+            arr3[k++] = arr2[j++];
     }
-    cout << v.size() - c << " ";
+
+    // Store remaining elements of first array
+    while (i < n1)
+        arr3[k++] = arr1[i++];
+
+    // Store remaining elements of second array
+    while (j < n2)
+        arr3[k++] = arr2[j++];
 }
+
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
-    vector<int> v(n);
-    int i;
-    for (i = 0; i < n; i++)
+    int n, m;
+    cin >> n >> m;
+    vector<int> v(n), v2(m);
+    set<int>st;
+    for (int i = 0; i < n; i++)
     {
         cin >> v[i];
+        st.insert(v[i]);
     }
-    vector<pair<int, int>> c;
-    for (i = 0; i < k; i++)
+    for (int i = 0; i < m; i++)
     {
-        int x, y;
-        cin >> x >> y;
-        c.push_back(make_pair(x, y));
+        cin >> v2[i];
+        st.insert(v[i]);
     }
-    for (i = 0; i < c.size(); i++)
+    sort(st.begin(),st.end());
+    vector<int>v3;
+    for(auto it:st){
+        v3.push_back(it);
+    }
+    int mid = st.size() / 2;
+    if (st.size()% 2)
     {
-        v[c[i].first - 1] = c[i].second;
-        check(v);
+        float ans = v3[mid]/1.0;
+        cout << setprecision(2)<<ans;
+    }
+    else
+    {
+        float x = v3[mid], y = v3[mid - 1];
+        cout << setprecision(2)<<(x + y) / 2.0;
     }
 }
 
