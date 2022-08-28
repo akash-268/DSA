@@ -9,28 +9,14 @@ void solve()
 
 int main()
 {
-    // double i = 3.0;
-    // double *p1 = &i;
-    // int *ptr = new int[5];
-    // for (int i = 0; i < 5; i++)
-    // {
-    //     *(ptr + i) = i + 1;
-    // }
-    // for (int i = 0; i < 5; i++)
-    // {
-    //     cout << *(ptr + i) << " ";
-    // }
-    // cout << endl;
-    // cout << ptr + 1 << endl;
-    // double *p2 = p1;
-    // p1 = p1 + 1;
-    // cout << p2 - p1 << endl;
-    // cout << *p1;
-    // delete p1;
-    // delete ptr;
-    char *a[7] = "abcdef";
-    char *p1 = a;
-
-    cout << p1;
+    auto b = make_shared<int>(25);
+    cout << *b << endl;
+    auto x = make_unique<int[]>(10);
+    for (int i = 0; i < 10; i++)
+    {
+        x[i] = i + 1;
+    }
+    for (int i = 0; i < 10; i++)
+        cout << x[i] << " ";
     return 0;
 }
