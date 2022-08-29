@@ -126,11 +126,10 @@ int main()
     cin >> s;
 
     int x = s.find("=");
-    
-    cout << endl
-         << "index: " << x << endl;
+    printf("\nindex: %d\n",x);
 
     string s1 = s.substr(x + 1), s2 = s.substr(0, x);
+    
     cout << endl
          << s2 << endl
          << s1 << endl;
