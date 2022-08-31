@@ -117,19 +117,19 @@ int main()
 {
     int a = 5, b = 6, c = 7, d = 8;
     map<string, int> mp;
-    mp.insert({"var1", 5});
-    mp.insert({"var2", 6});
-    mp.insert({"var3", 7});
-    mp.insert({"var4", 8});
+    mp.insert({"a", 5});
+    mp.insert({"b", 6});
+    mp.insert({"c", 7});
+    mp.insert({"d", 8});
 
     string s;
     cin >> s;
 
     int x = s.find("=");
-    printf("\nindex: %d\n",x);
+    printf("\nindex: %d\n", x);
 
     string s1 = s.substr(x + 1), s2 = s.substr(0, x);
-    
+
     cout << endl
          << s2 << endl
          << s1 << endl;
