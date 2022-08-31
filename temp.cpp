@@ -3,7 +3,43 @@
 using namespace std;
 // JAI SHREE RAM
 // HAR HAR MAHADEV
+    class Browser
+    {
+    public:
+        vector<string> url_list;
+        int cur = 0;
+        Browser(string homepage)
+        {
+            url_list.push_back(homepage);
+        }
 
+        void visit(string url)
+        {
+            cur++;
+            if (cur <= url_list.size() - 1)
+            {
+                url_list[cur] = url;
+                url_list.resize(cur + 1);
+            }
+            else
+                url_list.push_back(url);
+        }
+        string back(int steps)
+        {
+            cur -= steps;
+            if (cur < 0)
+                cur = 0;
+            return url_list[cur];
+        }
+
+        string forward(int steps)
+        {
+            cur += steps;
+            if (cur > url_list.size() - 1)
+                cur = url_list.size() - 1;
+            return url_list[cur];
+        }
+    };
 void solve()
 {
 }
@@ -19,14 +55,14 @@ int main()
     // }
     // cout << sum << endl;
 
-    string s = "a/b/c/d";
-    stringstream ss(s);
-    string word;
-    while (!ss.eof())
-    {
-        getline(ss, word, 'b');
-        cout << word << endl;
-    }
+    // string s = "a/b/c/d";
+    // stringstream ss(s);
+    // string word;
+    // while (!ss.eof())
+    // {
+    //     getline(ss, word, 'b');
+    //     cout << word << endl;
+    // }
     // stack<shared_ptr<int>> st;
     // auto x1 = make_shared<int>(1);
     // st.push(x1);
@@ -52,10 +88,10 @@ int main()
     // cout << endl;
     // shared_ptr<int> b = make_shared<int>(25);
     // cout << *b << endl;
-    // char str[] = "abcde";
-    // unique_ptr<char[]> s = make_unique<char[]>(6);
+    // string *str = "abcde";
+    unique_ptr<string>  s = make_unique<string>("abcd");
     // s = str;
-    // cout << s << endl;
+    cout << *s << endl;
     // unique_ptr<int[]> x = make_unique<int[]>(10);
     // for (int i = 0; i < 10; i++)
     // {
