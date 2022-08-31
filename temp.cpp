@@ -3,43 +3,7 @@
 using namespace std;
 // JAI SHREE RAM
 // HAR HAR MAHADEV
-    class Browser
-    {
-    public:
-        vector<string> url_list;
-        int cur = 0;
-        Browser(string homepage)
-        {
-            url_list.push_back(homepage);
-        }
 
-        void visit(string url)
-        {
-            cur++;
-            if (cur <= url_list.size() - 1)
-            {
-                url_list[cur] = url;
-                url_list.resize(cur + 1);
-            }
-            else
-                url_list.push_back(url);
-        }
-        string back(int steps)
-        {
-            cur -= steps;
-            if (cur < 0)
-                cur = 0;
-            return url_list[cur];
-        }
-
-        string forward(int steps)
-        {
-            cur += steps;
-            if (cur > url_list.size() - 1)
-                cur = url_list.size() - 1;
-            return url_list[cur];
-        }
-    };
 void solve()
 {
 }
