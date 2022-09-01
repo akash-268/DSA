@@ -8,7 +8,7 @@ int main()
 
     // open a file in write mode.
     ofstream outfile;
-    outfile.open("afile.dat");
+    outfile.open("afile.txt");
 
     cout << "Writing to the file" << endl;
     cout << "Enter your name: ";
