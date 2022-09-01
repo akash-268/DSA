@@ -9,9 +9,14 @@ class Music
 public:
     Music(int id, string name, string artist)
     {
+        cout << "Created Music" << endl;
         this->id = id;
         this->artist = artist;
         this->name = name;
+    }
+    ~Music()
+    {
+        cout << "Deleted Music" << endl;
     }
     int getId()
     {
@@ -30,11 +35,12 @@ class Playlist
 {
     int pid;
     string pname;
-    vector<unique_ptr<Music>> musics;
+    vector<shared_ptr<Music>> musics;
 
 public:
     Playlist(int pid, string pname)
     {
+        cout << "Created Playlist" << endl;
         this->pid = pid;
         this->pname = pname;
     }
@@ -57,7 +63,7 @@ public:
                 << "ID: " << i->getId() << " Name: " << i->getName() << " Artist: " << i->getArtist() << endl;
         cout << "---------------";
     }
-    void addMusic(unique_ptr<Music> &music)
+    void addMusic(shared_ptr<Music> &music)
     {
         musics.push_back(move(music));
     }
@@ -69,35 +75,60 @@ public:
     {
         return pname;
     }
+    ~Playlist()
+    {
+        cout << "DELETED Playlist" << endl;
+    }
+    void fun(User *obj)
+    {
+        cout << obj->getName() << endl;
+    }
 };
 class User
 {
     string username;
-    vector<unique_ptr<Playlist>> playlists;
+    vector<shared_ptr<Playlist>> playlists;
     int id;
 
 public:
     User(int id, string name)
     {
+        cout << "Created User" << endl;
         this->id = id;
         this->username = name;
+    }
+    string getName()
+    {
+        return username;
+    }
+    ~User()
+    {
+        cout << "Deleted User" << endl;
     }
 };
 int main()
 {
-    unique_ptr<User> user1 = make_unique<User>(1, "Talha");
-    unique_ptr<Playlist> playlist1 = make_unique<Playlist>(1, "Sad songs");
-    unique_ptr<Music> music1 = make_unique<Music>(1, "Ek lamha", "Azan Sami");
-    unique_ptr<Music> music2 = make_unique<Music>(2, "Humnava Mere", "Jubin");
-    unique_ptr<Music> music3 = make_unique<Music>(3, "Your fault", "Excision");
-    unique_ptr<Music> music4 = make_unique<Music>(4, "There for you", "Martin Garrix");
-    unique_ptr<Music> music5 = make_unique<Music>(5, "Humnava Mere", "Jubin");
-    playlist1->addMusic(music1);
-    playlist1->addMusic(music2);
-    unique_ptr<Playlist> playlist2 = make_unique<Playlist>(2, "Vibe songs");
-    playlist2->addMusic(music3);
-    playlist2->addMusic(music4);
-    playlist2->addMusic(music5);
-    playlist1->displayPlaylist();
-    playlist2->displayPlaylist();
+    shared_ptr<User *> user2 = make_shared<User *>(1, "Akash");
+    // {
+    //     shared_ptr<User> user1 = make_shared<User>(1, "Akash");
+    //     user2 = user1;
+    // }
+    // cout << user2->getName() << endl;
+
+    shared_ptr<Playlist>
+        playlist1 = make_shared<Playlist>(1, "Sad songs");
+    playlist1->fun(*user2);
+    // shared_ptr<Music> music1 = make_shared<Music>(1, "Ek lamha", "Azan Sami");
+    // shared_ptr<Music> music2 = make_shared<Music>(2, "Humnava Mere", "Jubin");
+    // shared_ptr<Music> music3 = make_shared<Music>(3, "Your fault", "Excision");
+    // shared_ptr<Music> music4 = make_shared<Music>(4, "There for you", "Martin Garrix");
+    // shared_ptr<Music> music5 = make_shared<Music>(5, "Humnava Mere", "Jubin");
+    // playlist1->addMusic(music1);
+    // playlist1->addMusic(music2);
+    // shared_ptr<Playlist> playlist2 = make_shared<Playlist>(2, "Vibe songs");
+    // playlist2->addMusic(music3);
+    // playlist2->addMusic(music4);
+    // playlist2->addMusic(music5);
+    // playlist1->displayPlaylist();
+    // playlist2->displayPlaylist();
 }
