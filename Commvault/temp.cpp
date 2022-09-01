@@ -3,18 +3,6 @@
 using namespace std;
 // JAI SHREE RAM
 // HAR HAR MAHADEV
-void print(vector<int> &arr)
-{
-    for (auto &it : arr)
-        cout << it << " ";
-    cout << endl;
-}
-
-void shuffle(vector<int> &arr)
-{
-
-    random_shuffle(arr.begin(), arr.end());
-}
 int main()
 {
     vector<pair<int, int>> l;
@@ -24,13 +12,10 @@ int main()
     l.push_back({4, 40});
     l.push_back({5, 50});
     map<int, int> mp;
-    mp.insert(1, 10);
-    mp.insert(2, 20);
-    mp.insert(3, 30);
-    mp.insert(4, 40);
-    mp.insert(5, 50);
-    auto i = mp.find(2);
+    mp[1] = 10;
+    mp[2] = 20;
+    mp[3] = 30;
+    mp[4] = 40;
     vector<pair<int, int>>::iterator i1 = l.begin();
-    auto p1 = *(i1);
-    cout << p1.first << ":" << p1.second << endl;
+    cout << i1->first << ":" << i1->second << endl;
 }
