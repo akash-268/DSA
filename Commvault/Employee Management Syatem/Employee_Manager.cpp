@@ -1,14 +1,7 @@
-// EMPLOYEE MANAGEMENT SYSTEM USING CPP - Sagar Developer
-
-// Include All Header files.
-#include <iostream>
-#include <windows.h>
-#include <unistd.h>
-#include <conio.h>
-#include <cstdlib>
-#include <cstring>
-#include <cstdio>
-#include <fstream>
+#include <windows.h> //For Sleep()
+#include <unistd.h>  //For Sleep()
+#include <conio.h>   //For _getch()/getch()
+#include <bits/stdc++.h>
 using namespace std;
 
 class Employee_management
@@ -79,7 +72,7 @@ void Employee_management::menu()
             break;
         case 6:
             system("cls");
-            cout << "\n\t\t\t>> EMPLOYE MANAGEMENT SYSTEM - By Sagar Developer <<\n\n";
+            cout << "\n\t\t\t>> EMPLOYE MANAGEMENT SYSTEM - By Akash Bajpai <<\n\n";
             Sleep(10);
             exit(0);
         default:
@@ -382,6 +375,7 @@ int password_user() // Employee Authentication
     else
     {
         cout << "\nInvalid Input.. Please Try Again..";
+        Sleep(900);
         password_user();
     }
     return 0;
