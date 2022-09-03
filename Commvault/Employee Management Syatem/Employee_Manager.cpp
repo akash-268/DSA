@@ -375,7 +375,7 @@ int password_user() // Employee Authentication
     else
     {
         cout << "\nInvalid Input.. Please Try Again..";
-        Sleep(900);
+        Sleep(1500);
         password_user();
     }
     return 0;
