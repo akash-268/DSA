@@ -1,8 +1,6 @@
-string s = "a/b/c/d";
-    // stringstream ss(s);
-    // string word;
-    // while (!ss.eof())
+for (int i = 1; i <= 3; i++)
     // {
-    //     getline(ss, word, 'b');
-    //     cout << word << endl;
+    //     int x;
+    //     cin >> x;
+    //     vt.push_back(make_shared<int>(x));
     // }
