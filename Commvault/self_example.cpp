@@ -4,51 +4,26 @@ using namespace std;
 class A
 {
 public:
-    int a;
-    A(int x)
+    virtual void show()
     {
-        a = x;
+        cout << "Base Class" << endl;
     }
-    void setA(int x)
-    {
-        a = x;
-    }
-    int getA()
-    {
-        return a;
-    }
-    ~A() {}
 };
 
-class B
+class B : public A
 {
 public:
-    int b;
-    B(int x)
+    void show()
     {
-        b = x;
+        cout << "derived class" << endl;
     }
-    void setB(int x)
-    {
-        b = x;
-    }
-    int getsA(A *obj)
-    {
-        obj->getA();
-    }
-    int getB()
-    {
-        return b;
-    }
-    ~B() {}
 };
 
 int main()
 {
-    B *obj = new B(5);
-    A *ob = new A(10);
-    int ans = obj->getsA(ob);
-    cout << ans << endl;
-    delete ob;
-    delete obj;
+    A *obj;
+    B ob;
+    obj = &ob;
+    obj->show();
+    ob.show();
 }
