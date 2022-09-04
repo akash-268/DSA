@@ -113,48 +113,48 @@ float postfixEval(string postfix)
     }
     return stk.top();
 }
-// int main()
-// {
-//     int a = 5, b = 6, c = 7, d = 8;
-//     map<string, int> mp;
-//     mp.insert({"a", 5});
-//     mp.insert({"b", 6});
-//     mp.insert({"c", 7});
-//     mp.insert({"d", 8});
+int main()
+{
+    int a = 5, b = 6, c = 7, d = 8;
+    map<string, int> mp;
+    mp.insert({"a", 5});
+    mp.insert({"b", 6});
+    mp.insert({"c", 7});
+    mp.insert({"d", 8});
 
-//     string s;
-//     cin >> s;
+    string s;
+    cin >> s;
 
-//     int x = s.find("=");
-//     printf("\nindex: %d\n", x);
+    int x = s.find("=");
+    printf("\nindex: %d\n", x);
 
-//     string s1 = s.substr(x + 1), s2 = s.substr(0, x);
+    string s1 = s.substr(x + 1), s2 = s.substr(0, x);
 
-//     cout << endl
-//          << s2 << endl
-//          << s1 << endl;
-//     string new_str = "", op = "";
-//     int idx;
-//     for (int i = 0; i < s1.size(); i++)
-//     {
-//         if (isOperator(s1[i]))
-//         {
+    cout << endl
+         << s2 << endl
+         << s1 << endl;
+    string new_str = "", op = "";
+    int idx;
+    for (int i = 0; i < s1.size(); i++)
+    {
+        if (isOperator(s1[i]))
+        {
 
-//             new_str += to_string(mp[op]);
-//             new_str += s1[i];
-//             op = "";
-//             idx = i;
-//         }
-//         else
-//             op.push_back(s1[i]);
-//     }
-//     new_str += to_string(mp[s1.substr(idx + 1)]);
-//     cout << new_str << endl;
-//     string post = inToPost(new_str);
-//     cout << endl
-//          << post << endl;
+            new_str += to_string(mp[op]);
+            new_str += s1[i];
+            op = "";
+            idx = i;
+        }
+        else
+            op.push_back(s1[i]);
+    }
+    new_str += to_string(mp[s1.substr(idx + 1)]);
+    cout << new_str << endl;
+    string post = inToPost(new_str);
+    cout << endl
+         << post << endl;
 
-//     float ans = postfixEval(post);
-//     cout << endl
-//          << ans << endl;
-// }
+    float ans = postfixEval(post);
+    cout << endl
+         << ans << endl;
+}
