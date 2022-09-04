@@ -21,9 +21,11 @@ public:
 
 int main()
 {
+    A base;
     A *obj;
     B ob;
     obj = &ob;
     obj->show();
     ob.show();
+    base.show();
 }
