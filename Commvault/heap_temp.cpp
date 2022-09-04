@@ -5,7 +5,7 @@ using namespace std;
 // HAR HAR MAHADEV
 int main()
 {
-    priority_queue<int, vector<int>, greater<int>> pq;
+    priority_queue<int, vector<int>, greater<int>> pq; //ascending order
     for (int i = 0; i < 10; i++)
     {
         int x;
