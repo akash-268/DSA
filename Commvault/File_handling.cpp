@@ -1,11 +1,6 @@
 #include <fstream>
 #include <iostream>
-// #include <conio.h>
-// #include <sys/types.h>
-// #include <sys/stat.h>
 #include <unistd.h>
-// #include <stdio.h>
-// #include <stdlib.h>
 using namespace std;
 
 int main()
@@ -33,6 +28,9 @@ int main()
     outfile.close();
 
     // open a file in read mode.
+    /*
+    Copying a file ->
+
     ifstream infile;
     ofstream cpyfile;
     infile.open("D:/afile.txt");
@@ -43,6 +41,7 @@ int main()
         cpyfile << data << "\n";
     }
 
+    */
     // write the data at the screen.
     // cout << data << endl;
 
@@ -51,8 +50,8 @@ int main()
     // cout << data << endl;
 
     // close the opened file.
-    infile.close();
-    cpyfile.close();
+    // infile.close();
+    // cpyfile.close();
     /*
         Creating Directories and moving files ->
 
