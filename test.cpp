@@ -1,33 +1,21 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-class Work
-{
-    int number;
-    static int counter;
-
-public:
-    Work()
-    {
-        number = counter;
-        counter++;
-        cout << "ok" << number << endl;
-        if (number == 2)
-        {
-            throw 2;
-        }
-    }
-};
-int Work::counter = 1;
 int main()
 {
-    try
+    vector<vector<int>> mat(3, vector<int>(3));
+    // for (int i = 0; i < 3; i++)
+    // {
+    //     vector<int> temp(3);
+    //     for (int j = 0; j < 3; j++)
+    //         temp.push_back(0);
+    //     mat.push_back(temp);
+    // }
+    fill(mat.begin(), mat.end(), 0);
+    for (int i = 0; i < 3; i++)
     {
-        Work array[3];
-    }
-    catch (int l)
-    {
-        for (int z = 1; z < 2; z++)
-            cout << "dsdasda" << l << endl;
+        for (int j = 0; j < 3; j++)
+            cout << mat[i][j];
+        cout << endl;
     }
 }
