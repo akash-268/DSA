@@ -142,7 +142,7 @@ int main()
     for (auto it : st)
         cout << it << " ";
     cout << endl;
-    string s = "a=5,b=6,d=a,c=a+(d-b)";
+    string s = "a=5,b=6,d=a,e=7,f=10,g=15,c=a+(d-b)+e*f";
     vector<string> input;
     stringstream ss(s);
     string temp;
@@ -164,6 +164,8 @@ int main()
             if (isDigit(s1))
             {
                 cout << "All are digits" << endl;
+                if (!st.size())
+                    cout << "\nStack Overflow\n";
                 mp[s2] = *st.begin();
                 **st.begin() = stoi(s1);
                 st.erase(st.begin());
@@ -197,7 +199,7 @@ int main()
                                 str1 = "";
                             }
 
-                            equation += s1[i];
+                            equation += s1[i];  
                         }
                     }
                     if (str1.size() > 0 and mp.find(str1) != mp.end())
@@ -209,6 +211,9 @@ int main()
                     cout << ans << endl;
                     int ans1 = ans;
                     cout << ans1 << endl;
+
+                    if (!st.size())
+                        cout << "\nStack Overflow\n";
                     mp[s2] = *st.begin();
                     **st.begin() = ans1;
                     st.erase(st.begin());

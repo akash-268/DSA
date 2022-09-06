@@ -1,7 +1,11 @@
-#include <windows.h> //For Sleep()
-#include <unistd.h>  //For Sleep()
-#include <conio.h>   //For _getch()/getch()
-#include <bits/stdc++.h>
+#include <iostream>
+#include <windows.h>
+#include <unistd.h>
+#include <conio.h>
+#include <cstdlib>
+#include <cstring>
+#include <cstdio>
+#include <fstream>
 using namespace std;
 
 class Employee_management
@@ -348,7 +352,7 @@ int password_user() // Employee Authentication
                 cout << "\n\n\n\t\t\t\t\t| Verfiying EMPLOYEE |\n\t\t\t\t\t";
                 for (int a = 1; a < 8; a++)
                 {
-                    Sleep(500);
+                    Sleep(100);
                     cout << "...";
                 }
                 cout << "\n\nAccess Granted..\n\n";
@@ -360,7 +364,7 @@ int password_user() // Employee Authentication
                 cout << "\n\n\n\t\t\t\t\t| Verfiying EMPLOYEE |\n\t\t\t\t\t";
                 for (int a = 1; a < 8; a++)
                 {
-                    Sleep(500);
+                    Sleep(100);
                     cout << "...";
                 }
                 cout << "\n\nAccess Aborted...\n\n";
@@ -375,7 +379,6 @@ int password_user() // Employee Authentication
     else
     {
         cout << "\nInvalid Input.. Please Try Again..";
-        Sleep(1500);
         password_user();
     }
     return 0;
