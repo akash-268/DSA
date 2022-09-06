@@ -73,7 +73,7 @@ int main()
     Matrix *obj = new Matrix(3, 3);
     for (int i = 0; i < obj->getRows(); i++)
     {
-        for (int j = 0; j < obj->getCol(); j++)
+        for (int j = 0; j < obj->getCol(); j++) 
         {
             int x;
             cin >> x;
