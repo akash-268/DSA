@@ -1,5 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define ll long long int
+void solve()
+{
+    ll n;
+    cin >> n;
+    ll a[n];
+    set<ll> st;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+    ll cnt = 0, xor1 = 0;
+    st.insert(0);
+    for (int i = 0; i < n; i++)
+    {
+        xor1 ^= a[i];
+        if (st.count(xor1) >= 1)
+        {
+            st.clear();
+            cnt++;
+            st.insert(0);
+            xor1 = 0;
+        }
+        st.insert(xor1);
+    }
+    cout << cnt << endl;
+}
 
 int main()
 {
@@ -13,4 +40,5 @@ int main()
     {
         cout << it.first << ":" << it.second << endl;
     }
+    solve();
 }
