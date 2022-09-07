@@ -43,14 +43,15 @@ int main()
 
     */
     // write the data at the screen.
-    // cout << data << endl;
+    cout << data << endl;
+    fstream infile;
 
     // again read the data from the file and display it.
-    // infile >> data;
-    // cout << data << endl;
+    infile >> data;
+    cout << data << endl;
 
     // close the opened file.
-    // infile.close();
+    infile.close();
     // cpyfile.close();
     /*
         Creating Directories and moving files ->
