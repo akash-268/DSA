@@ -1,5 +1,5 @@
 #include <fstream>
-#include <iostream>         
+#include <iostream>
 #include <unistd.h>
 using namespace std;
 
@@ -9,7 +9,7 @@ int main()
     // open a file in write mode.
     ofstream outfile;
     // int x = mkdir("D:/personal");
-    outfile.open("D:/afile.txt");
+    outfile.open("afile.txt");
 
     cout << "Writing to the file" << endl;
     cout << "Enter your name: ";

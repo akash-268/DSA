@@ -3,19 +3,14 @@ using namespace std;
 
 int main()
 {
-    vector<vector<int>> mat(3, vector<int>(3));
-    // for (int i = 0; i < 3; i++)
-    // {
-    //     vector<int> temp(3);
-    //     for (int j = 0; j < 3; j++)
-    //         temp.push_back(0);
-    //     mat.push_back(temp);
-    // }
-    fill(mat.begin(), mat.end(), 0);
-    for (int i = 0; i < 3; i++)
+    unordered_map<int, int> mp;
+    mp.insert(2, 5);
+    mp.insert(1, 51);
+    mp.insert(8, 52);
+    mp.insert(5, 53);
+    mp.insert(10, 2);
+    for (auto it : mp)
     {
-        for (int j = 0; j < 3; j++)
-            cout << mat[i][j];
-        cout << endl;
+        cout << it.first << ":" << it.second << endl;
     }
 }
