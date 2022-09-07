@@ -15,7 +15,7 @@ void solve()
     st.insert(0);
     for (int i = 0; i < n; i++)
     {
-        xor1 ^= a[i];
+        xor1 = xor1 ^ a[i];
         if (st.count(xor1) >= 1)
         {
             st.clear();
