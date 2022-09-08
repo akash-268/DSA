@@ -1,44 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long int
-void solve()
+class student
 {
-    ll n;
-    cin >> n;
-    ll a[n];
-    set<ll> st;
-    for (int i = 0; i < n; i++)
+public:
+    string name;
+    int age;
+    int roll;
+    student(string s, int a, int r)
     {
-        cin >> a[i];
+        name = s;
+        age = a;
+        roll = r;
     }
-    ll cnt = 0, xor1 = 0;
-    st.insert(0);
-    for (int i = 0; i < n; i++)
-    {
-        xor1 = xor1 ^ a[i];
-        if (st.count(xor1) >= 1)
-        {
-            st.clear();
-            cnt++;
-            st.insert(0);
-            xor1 = 0;
-        }
-        st.insert(xor1);
-    }
-    cout << cnt << endl;
-}
+};
 
 int main()
 {
-    unordered_map<int, int> mp;
-    mp.insert(2, 5);
-    mp.insert(1, 51);
-    mp.insert(8, 52);
-    mp.insert(5, 53);
-    mp.insert(10, 2);
-    for (auto it : mp)
-    {
-        cout << it.first << ":" << it.second << endl;
-    }
-    solve();
+    student ob("akash", 22, 25636);
+    cout << &ob << endl
+         << ob.name << " " << ob.age << " " << ob.roll << endl;
+    student *ob2 = &ob;
+    cout << &ob2 << endl
+         << ob2->name << " " << ob2->age << " " << ob2->roll;
 }
