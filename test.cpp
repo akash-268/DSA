@@ -1,62 +1,53 @@
-// #include <sys / mman .h >
-// #include < errno .h >
-#include <string>
-#include <stdexcept>
-#include <iostream>
-template <typename ElementType>
-class VirtualMemoryContainer
-{
-private:
-    size_t num_elements;
-    ElementType *container;
+#include <bits/stdc++.h>
+using namespace std;
+// JAI SHREE RAM
+// HAR HAR MAHADEV
+#define ll long long int
+#define vin vector<int>
+#define f(i, a, b) for (ll i = a; i < b; i++)
+#define rf(i, a, b) for (ll i = a; i >= b; i--)
+#define mp make_pair
+#define pb push_back
+#define vll vector<ll>
+#define pll pair<ll, ll>
+#define mll map<ll, ll>
+#define vc vector
+#define fi first
+#define se second
+#define all(x) x.begin(), x.end()
+const int maxi = 1e5 + 5;
+const ll mod = 1e9 + 7;
+const ll inf = 1e9;
+const ll eps = 1e-9;
 
-public:
-    VirtualMemoryContainer(size_t max_elements)
+void solve()
+{
+    ll n;
+    cin >> n;
+    if (n % 2)
     {
-        num_elements = max_elements;
-        container = (ElementType *)mmap(nullptr, sizeof(ElementType) * max_elements, PROT_NONE,
-                                        MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-        if (container == (ElementType *)-1)
-            throw vmc_error(errno);
-        const int64_t block_size = 1048576;
-        int64_t remaining = sizeof(ElementType) * max_elements;
-        uint8_t *head = (uint8_t *)container;
-        while (remaining > 0)
-        {
-            int ret = mprotect(head, std ::min(block_size, remaining), PROT_READ | PROT_WRITE);
-            if (ret != 0)
-                throw vmc_error(errno);
-            head += block_size;
-            remaining -= block_size;
-        }
+        for (int i = n - 3; i >= 2; i--)
+            cout << i << " ";
+        cout << n - 2 << " " << 1 << " " << n - 1 << " " << n << endl;
     }
-    VirtualMemoryContainer(VirtualMemoryContainer &other) = delete;
-    VirtualMemoryContainer(VirtualMemoryContainer &&other)
+    else
     {
-        num_elements = other.num_elements;
-        other.num_elements = 0;
-        container = other.container;
-        other.container = nullptr;
+
+        for (int i = n - 2; i >= 1; i--)
+            cout << i << " ";
+        cout << n - 1 << " " << n << endl;
     }
-    ˜ VirtualMemoryContainer()
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    ll t = 1;
+    cin >> t;
+    while (t--)
     {
-        if (container != nullptr)
-        {
-            int ret = munmap(container, sizeof(ElementType) * num_elements);
-            if (ret != 0)
-                throw vmc_error(errno);
-        }
+        solve();
     }
-    inline ElementType &operator[](size_t idx)
-    {
-        return container[idx];
-    }
-    inline const ElementType &operator[](size_t idx) const
-    {
-        return container[idx];
-    }
-    inline size_t size() const
-    {
-        return num_elements;
-    }
-};
+}
