@@ -2,24 +2,51 @@
 using namespace std;
 int main()
 {
-    int n;
-    cin >> n;
-    vector<int> v(n);
-    for (int i = 0; i < n; i++)
-        cin >> v[i];
-    vector<int> res(n, 0);
-    for (int i = 0; i < n - 1; i++)
+    int t;
+    cin >> t;
+    int ans = 0;
+    while (t--)
     {
-        for (int j = i + 1; j < n; j++)
+        string s;
+        cin >> s;
+        map<char, int> mp;
+        int flag = 0;
+        for (auto i : s)
         {
-            if (v[j] > v[i])
+            mp[i]++;
+        }
+        if (mp.size() > 2)
+            continue;
+        if (mp.find('a') == mp.end() || mp.find('b') == mp.end())
+            continue;
+        int idx;
+        for (int i = 0; i < s.size(); i++)
+        {
+            if (s[i] == 'b')
             {
-                res[i] = j - i;
+                idx = i;
                 break;
             }
         }
+        for (int i = 0; i < idx; i++)
+        {
+            if (s[i] != 'a')
+            {
+                flag = 1;
+                break;
+            }
+        }
+        for (int i = idx; i < s.size(); i++)
+        {
+            if (s[i] != 'b')
+            {
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 0)
+            ans++;
     }
-    for (auto it : res)
-        cout << it << " ";
+    cout << ans << endl;
     return 0;
 }
