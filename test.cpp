@@ -2,51 +2,13 @@
 using namespace std;
 int main()
 {
-    int t;
-    cin >> t;
-    int ans = 0;
-    while (t--)
+    vector<int> v = {1, 2, 3, 4, 5};
+    for (auto &i : v)
     {
-        string s;
-        cin >> s;
-        map<char, int> mp;
-        int flag = 0;
-        for (auto i : s)
-        {
-            mp[i]++;
-        }
-        if (mp.size() > 2)
-            continue;
-        if (mp.find('a') == mp.end() || mp.find('b') == mp.end())
-            continue;
-        int idx;
-        for (int i = 0; i < s.size(); i++)
-        {
-            if (s[i] == 'b')
-            {
-                idx = i;
-                break;
-            }
-        }
-        for (int i = 0; i < idx; i++)
-        {
-            if (s[i] != 'a')
-            {
-                flag = 1;
-                break;
-            }
-        }
-        for (int i = idx; i < s.size(); i++)
-        {
-            if (s[i] != 'b')
-            {
-                flag = 1;
-                break;
-            }
-        }
-        if (flag == 0)
-            ans++;
+        i = 9;
+        cout << i << " ";
     }
-    cout << ans << endl;
-    return 0;
+    cout << endl;
+    for (auto i : v)
+        cout << i << " ";
 }
