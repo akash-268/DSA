@@ -3,15 +3,25 @@ using namespace std;
 map<string, vector<int>> mp;
 class cvFile
 {
-
     string fileName;
-
 public:
-    string getFileName()
+    string getFullFileName()
     {
         return fileName;
     }
-
+    string getFileName()
+    {
+        int end;
+        int x = fileName.find_last_of("/");
+        int y = fileName.find("_");
+        if (y == -1)
+            end = fileName.find(".");
+        else
+            end = y;
+        cout << "strt=" << x << " "
+             << "end=" << end << endl;
+        return fileName.substr(x + 1, end - x - 1);
+    }
     cvFile(string path, string content)
     {
         // cout << "constructor called" << endl;
@@ -25,24 +35,16 @@ public:
         string temp1 = "", temp2 = "";
         int end;
         if (y == -1)
-        {
             end = path.find_last_of(".");
-        }
         else
-        {
             end = y;
-        }
         for (int i = x + 1; i < end; i++)
             temp1.push_back(path[i]);
-        // cout << temp1 << endl;
         if (y != -1)
-        {
             for (int i = y + 1; path[i] != '.'; i++)
                 temp2.push_back(path[i]);
-        }
         else
             temp2 = "0";
-        // cout << temp2;
         mp[temp1].push_back(stoi(temp2));
     }
 
@@ -56,18 +58,24 @@ public:
 
     int read(int rev, string content)
     {
-        string str = fileName + "_" + to_string(rev);
+        string name = this->getFileName();
+        cout << name << endl;
+        string str = "";
+        if (rev != 0)
+            str = name + "_" + to_string(rev);
+        else
+            str = fileName;
+        cout << str << endl;
         ifstream fin;
         fin.open(str);
         string line = "";
-        if (fin)
+        if (!fin)
         {
             cout << "No such file found\n";
             return 0;
         }
-        while (fin)
+        while (getline(fin, line))
         {
-            getline(fin, line);
             cout << line << endl;
         }
     }
@@ -91,5 +99,6 @@ int main()
         cout << endl;
     }
     // cout << f1->getFileName() << endl;
+    f1->read(0, "abcd");
     return 0;
 }
