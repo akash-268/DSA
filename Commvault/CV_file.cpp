@@ -1,9 +1,11 @@
 #include <bits/stdc++.h>
+#include <unistd.h>
 using namespace std;
 map<string, vector<int>> mp;
 class cvFile
 {
     string fileName;
+
 public:
     string getFullFileName()
     {
@@ -11,16 +13,9 @@ public:
     }
     string getFileName()
     {
-        int end;
         int x = fileName.find_last_of("/");
-        int y = fileName.find("_");
-        if (y == -1)
-            end = fileName.find(".");
-        else
-            end = y;
-        cout << "strt=" << x << " "
-             << "end=" << end << endl;
-        return fileName.substr(x + 1, end - x - 1);
+
+        return fileName.substr(x + 1);
     }
     cvFile(string path, string content)
     {
@@ -83,22 +78,22 @@ public:
 
 int main()
 {
-    cvFile *f1 = new cvFile("D:/File1.txt", "Welcome to Commvault 1!");
-    cvFile *f2 = new cvFile("D:/File2.txt", "Welcome to Commvault 2!");
-    cvFile *f2_1 = new cvFile("D:/File2_1.txt", "Welcome to Commvault 2!");
-    cvFile *f3 = new cvFile("D:/File3.txt", "Welcome to Commvault 3!");
-    cvFile *f3_1 = new cvFile("D:/File3_1.txt", "Welcome to Commvault 4!");
-    cvFile *f3_2 = new cvFile("D:/File3_2.txt", "Welcome to Commvault 5!");
-    for (auto &it : mp)
-    {
-        cout << it.first << ":";
-        for (auto &i : it.second)
-        {
-            cout << i << " ";
-        }
-        cout << endl;
-    }
+    cvFile *f1 = new cvFile("D:\\File1.txt", "Welcome to Commvault 1!");
+    cout << f1->getFileName();
+    // cvFile *f2 = new cvFile("D:/File2.txt", "Welcome to Commvault 2!");
+    // cvFile *f2_1 = new cvFile("D:/File2_1.txt", "Welcome to Commvault 2!");
+    // cvFile *f3 = new cvFile("D:/File3.txt", "Welcome to Commvault 3!");
+    // cvFile *f3_1 = new cvFile("D:/File3_1.txt", "Welcome to Commvault 4!");
+    // cvFile *f3_2 = new cvFile("D:/File3_2.txt", "Welcome to Commvault 5!");
+    // for (auto &it : mp)
+    // {
+    //     cout << it.first << ":";
+    //     for (auto &i : it.second)
+    //     {
+    //         cout << i << " ";
+    //     }
+    //     cout << endl;
+    // }
     // cout << f1->getFileName() << endl;
-    f1->read(0, "abcd");
     return 0;
 }
