@@ -25,11 +25,11 @@ class CV_SIOManager
 {
 public:
     CV_SIOManager() {}
-    CVFile *CVGetFile(string StringfilePthName);
+    CVFile *CVGetFile(string);
     void CVDisplayStats();
-    int CVDeleteFile(string filePathName);
-    int CVMoveFile(string sourcePathName, string targetPathName);
-    int CVCopyFile(string sourcePathName, string targetPathName);
+    int CVDeleteFile(string);
+    int CVMoveFile(string, string);
+    int CVCopyFile(string, string);
 };
 unordered_map<string, vector<string>> mp;
 unordered_map<string, CVFile *> m;
