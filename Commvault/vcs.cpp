@@ -10,6 +10,7 @@
 namespace fs = std::filesystem;
 
 #define VERSION_FILE "version_no.txt"
+#define INDEX_FILE "index.txt"
 #define BUFF_SIZE 256
 using namespace std;
 
@@ -18,7 +19,6 @@ class VCS {
 private:
     map<string, string> filemap;
     vector<string> filelist;
-
     vector<string> untracked;
     vector<string> modified;
     vector<string> deleted;
@@ -85,7 +85,7 @@ public:
         getcwd(buffer, sizeof(buffer));
         string curr_path(buffer);
 
-        if (mkdir(".vcs", 0777) == -1) {
+        if (mkdir(".vcs") == -1) {
             cerr << "Error making vcs directory\n";
             exit(EXIT_FAILURE);
         }
@@ -98,7 +98,7 @@ public:
             exit(EXIT_FAILURE);
         }
 
-        if (mkdir("global", 0777) == -1) {
+        if (mkdir("global") == -1) {
             cout << "Error making directory ./global\n";
             exit(EXIT_FAILURE);
         }
@@ -117,8 +117,7 @@ public:
         string curr_path(buffer);
 
         if (chdir(".vcs/global") == -1) {
-            cerr << "Error changing directory.\n
-            Check if you are in vcs' initialized directory\n";
+            cerr << "Error changing directory.\nCheck if you are in vcs' initialized directory\n";
         }
         getcwd(buffer, sizeof(buffer));
         string global_path(buffer);
@@ -163,7 +162,7 @@ public:
         flog.open("vcs_log.txt", ios::out);
         flog.close();
 
-        if ( mkdir("0", 0777) == -1 )  {
+        if ( mkdir("0") == -1 )  {
             cerr << "Error in making the 0th version\n";
             exit(EXIT_FAILURE);
         }
