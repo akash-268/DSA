@@ -43,8 +43,11 @@ int main()
 
     */
     // write the data at the screen.
-    cout << data << endl;
     fstream infile;
+    infile.open("afile.txt");
+
+    infile >> data;
+    cout << data << endl;
 
     // again read the data from the file and display it.
     infile >> data;
