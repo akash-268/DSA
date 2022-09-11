@@ -4,10 +4,10 @@
 #include <sys/types.h>
 #include <cstring>
 #include <unistd.h>
-#include <filesystem>
+#include <experimental/filesystem>
 #include <cstdio>
 
-namespace fs = std::filesystem;
+namespace fs = std::experimental::filesystem::v1;
 
 #define VERSION_FILE "version_no.txt"
 #define INDEX_FILE "index.txt"
@@ -29,7 +29,7 @@ private:
         ifstream sha_file("temp.txt", ios::in);
         string result_sha;
         getline(sha_file, result_sha);
-        fclose();
+        fclose(sha_file);
         if (remove("temp.txt")) {
             cout << "Error deleting temp file!!\n";
         }
