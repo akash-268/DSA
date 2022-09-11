@@ -7,6 +7,11 @@ class cvFile
     string fileName;
 
 public:
+    string getFileName()
+    {
+        return fileName;
+    }
+
     cvFile(string path, string content)
     {
         cout << "constructor called" << endl;
@@ -17,9 +22,19 @@ public:
         fileName = path;
         f.close();
     }
-    string getFileName()
+
+    void modify(string content)
     {
-        return fileName;
+        ofstream f;
+        f.open(fileName);
+        f << content;
+        f.close();
+    }
+
+    int read(int rev,string content){
+        string str=fileName+"_"+to_string(rev);
+        ifstream(str);
+        // if()
     }
 };
 
