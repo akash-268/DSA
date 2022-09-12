@@ -25,7 +25,7 @@ char *solve(char *str, int k)
         res[id++] = str[i];
     }
     res[id++] = ' ';
-    for (int i = 0; i <idx+1; i++)
+    for (int i = 0; i < idx + 1; i++)
     {
         res[id++] = str[i];
     }
