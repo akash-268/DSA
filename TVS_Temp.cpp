@@ -3,17 +3,10 @@ using namespace std;
 #define ll long long int
 // JAI SHREE RAM
 // HAR HAR MAHADEV
-bool check(vector<int> vec, int elem, int &idx)
+bool check(vector<int> vec, int elem)
 {
-    idx = -1;
-    for (int i = 0; i < vec.size(); i++)
-    {
-        if (vec[i] == elem)
-        {
-            idx = i;
-            return true;
-        }
-    }
+    if (find(vec.begin(), vec.end(), elem) != vec.end())
+        return true;
     return false;
 }
 int main()
@@ -25,21 +18,14 @@ int main()
         cin >> a[i];
     int m;
     cin >> m;
-    vector<int> b(m);
-    for (int i = 0; i < m; i++)
-        cin >> b[i];
-    int p;
-    cin >> p;
-    int res = 0, idx = -1;
-    for (auto x : b)
-    {
-        if (check(a, x, idx))
-        {
-            res += x * p;
-            a.erase(a.begin() + idx);
-        }
-        else
-            res -= x * p;
-    }
-    cout << res;
+    sort(a.begin(), a.end());
+    int res = 0;
+    if (n > m)
+        res = a[n - m - 1] + 1;
+    if (n == m)
+        res = a[n - m] - 1;
+    if (res > 1)
+        cout << res;
+    else
+        cout << 0;
 }
