@@ -2,131 +2,135 @@
 using namespace std;
 // JAI SHREE RAM
 // HAR HAR MAHADEV
-struct Node
+struct node
 {
     int key, value, cnt;
-    Node *next;
-    Node *prev;
-    Node(int _key, int _value)
+    node *next;
+    node *prev;
+    node(int k, int v)
     {
-        key = _key;
-        value = _value;
+        key = k;
+        value = v;
         cnt = 1;
     }
 };
 struct List
 {
     int size;
-    Node *head;
-    Node *tail;
+    node *head;
+    node *tail;
     List()
     {
-        head = new Node(0, 0);
-        tail = new Node(0, 0);
+        head = new node(0, 0);
+        tail = new node(0, 0);
         head->next = tail;
         tail->prev = head;
         size = 0;
     }
-
-    void addFront(Node *node)
+    void add(node *nod)
     {
-        Node *temp = head->next;
-        node->next = temp;
-        node->prev = head;
-        head->next = node;
-        temp->prev = node;
+        node *temp = head->next;
+        head->next = nod;
+        nod->next = temp;
+        temp->prev = nod;
+        nod->prev = head;
         size++;
     }
-
-    void removeNode(Node *delnode)
+    void remove(node *nod)
     {
-        Node *delprev = delnode->prev;
-        Node *delnext = delnode->next;
-        delprev->next = delnext;
-        delnext->prev = delprev;
+        node *pre = nod->prev;
+        node *nex = nod->next;
+        pre->next = nex;
+        nex->prev = pre;
         size--;
     }
 };
 class LFUCache
 {
-    map<int, Node *> keyNode;
-    map<int, List *> freqListMap;
-    int maxSizeCache;
-    int minFreq;
-    int curSize;
-
 public:
+    int size, minfreq, cursize;
+    map<int, node *> mp;
+    map<int, List *> freqlist;
     LFUCache(int capacity)
     {
-        maxSizeCache = capacity;
-        minFreq = 0;
-        curSize = 0;
+        size = capacity;
+        minfreq = 0;
+        cursize = 0;
     }
-    void updateFreqListMap(Node *node)
+
+    /*  agar koi node ko touch kiya toh jo jo operation karte hai-> map se delete karna list se delete karna
+        phir uski freq badhana aur vapis se list mein add karna aur map mein add karna voh sab kiya */
+    void touched(node *node)
     {
-        keyNode.erase(node->key);
-        freqListMap[node->cnt]->removeNode(node);
-        if (node->cnt == minFreq && freqListMap[node->cnt]->size == 0)
+        // map se erase kiya
+        mp.erase(node->key);
+        // frequency list wale map mein jis bhi jagah pada tha node vahan se delete kiya
+        freqlist[node->cnt]->remove(node);
+        // check kiya kahin map khali toh nahi ho gaya, if yes increase minimum frequency
+        if (node->cnt == minfreq && freqlist[node->cnt]->size == 0)
+            minfreq++;
+        
+        List *newFreq = new List(); // nayi empty list banayi
+        // agar jis index pe node jayega vahan pe list padi hai toh
+        if (freqlist.find(node->cnt + 1) != freqlist.end())
         {
-            minFreq++;
+            newFreq = freqlist[node->cnt + 1]; // nayi list ko usse assign kiya
         }
-
-        List *nextHigherFreqList = new List();
-        if (freqListMap.find(node->cnt + 1) != freqListMap.end())
-        {
-            nextHigherFreqList = freqListMap[node->cnt + 1];
-        }
-        node->cnt += 1;
-        nextHigherFreqList->addFront(node);
-        freqListMap[node->cnt] = nextHigherFreqList;
-        keyNode[node->key] = node;
+        node->cnt += 1;                // node ka count badhaya kyuki usko touch kiye humlog uski frequency badh gyi
+        newFreq->add(node);            // apni newly created list mein add kar diya usko
+        freqlist[node->cnt] = newFreq; // end mein apni newly created list ko map mein daal diya
+        mp[node->key] = node;          // map mein vapis se entry kar di
     }
 
+    /*  map mein agar node pada hota hai toh uss node ki jo bhi count(freq) hai uss freq pe jo list
+        hai usme se node ko hata ke front pe le aaye aur val return kar di else -1 return kiya */
     int get(int key)
     {
-        if (keyNode.find(key) != keyNode.end())
-        {
-            Node *node = keyNode[key];
-            int val = node->value;
-            updateFreqListMap(node);
-            return val;
+        // check if key is there in map or not
+        if (mp.find(key) != mp.end())
+        {                          // if yes ->
+            node *temp = mp[key];  // jo bhi node pada hai uss key pe usko nikala
+            int val = temp->value; // value store karayi uski
+            touched(temp);         // humlog node ko chuye hai toh touched call kiya
+            return val;            // value return ki
         }
-        return -1;
+        return -1; // agar nahi mila map mein toh -1 return
     }
 
+    /*  agar map mein pehle se pada hai toh uski value update hogi varna->
+        check kiya agar cache full hai toh min freq wali list se LRU delete kiya, 
+        phir min freq wali list mein apna new node bana ke add kiya */
     void put(int key, int value)
     {
-        if (maxSizeCache == 0)
-        {
-            return;
-        }
-        if (keyNode.find(key) != keyNode.end())
-        {
-            Node *node = keyNode[key];
-            node->value = value;
-            updateFreqListMap(node);
+        if (size == 0)
+            return; // leetcode ka edge case
+        // check if the key already in map means put(1,10) -> check if 1 is already in map
+        if (mp.find(key) != mp.end())
+        {                         // if yes->
+            node *temp = mp[key]; // uss key pe jo bhi node pada hai usko nikaal ke temp mein store kiya
+            temp->value = value;  // uss node ki value update kari
+            touched(temp);        // we accessed that node therefore touched ko call kiya
         }
         else
         {
-            if (curSize == maxSizeCache)
-            {
-                List *list = freqListMap[minFreq];
-                keyNode.erase(list->tail->prev->key);
-                freqListMap[minFreq]->removeNode(list->tail->prev);
-                curSize--;
+            if (cursize == size)
+            {                                                            // check if currsize(size of cache) agar full hai
+                List *list_of_min_freq = freqlist[minfreq];              // min freq wali list uthayi map se
+                mp.erase(list_of_min_freq->tail->prev->key);             // mp mein se uss list ke last element ko delete kiya
+                freqlist[minfreq]->remove(list_of_min_freq->tail->prev); // list se bhi delete kiya usi node ko
+                cursize--;                                               // delete karne pe cache ki size decrese hogi so, cursize-- kiya
             }
-            curSize++;
-            // new value has to be added who is not there previously
-            minFreq = 1;
-            List *listFreq = new List();
-            if (freqListMap.find(minFreq) != freqListMap.end())
-            {
-                listFreq = freqListMap[minFreq];
+            cursize++;                  // ek node humlog add karne jaa rahe hai so, cache ka size ek se increase kiya
+            minfreq = 1;                // new element hai toh voh humesha frequency 1 pe hi add hoga
+            List *newlist = new List(); // ek new list banayi
+            if (freqlist.find(minfreq) != freqlist.end())
+            {                                // agar freq 1 pe koi list pehle se padi hai toh ->
+                newlist = freqlist[minfreq]; // existing list ko new list mein copy kiya
             }
-            Node *node = new Node(key, value);
-            listFreq->addFront(node);
-            keyNode[key] = node;
-            freqListMap[minFreq] = listFreq;
+            node *newnode = new node(key, value); // ek node banaya with the given key and value
+            newlist->add(newnode);                // uss node ko add kiya in that newlist
+            freqlist[minfreq] = newlist;          // updated list ko copy kara diya min freq pe
+            mp[key] = newnode;                    // naya node add kiya hai toh voh map mein bhi add hoga
         }
     }
 };
