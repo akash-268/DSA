@@ -24,7 +24,7 @@ public:
 class CV_SIOManager
 {
 public:
-    CV_SIOManager() {}
+    // CV_SIOManager() {}
     CVFile *CVGetFile(string);
     void CVDisplayStats();
     int CVDeleteFile(string);
