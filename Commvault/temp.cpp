@@ -13,7 +13,15 @@ struct Node
 };
 int main()
 {
-   
+    int m = 107, y = 13;
+    printf((y < 7) ? "%d" : "%c", m);
+}
+struct Node *newNode(int data)
+{
+    struct Node *new_node = new Node();
+    new_node->data = data;
+    new_node->next = NULL;
+    return new_node;
 }
 struct Node *reverseList(struct Node *head)
 {
@@ -29,7 +37,7 @@ struct Node *reverseList(struct Node *head)
 }
 struct Node *AddTwoNumbers(struct Node *list1, struct Node *list2)
 {
-    struct Node *ptr = new Node();
+    struct Node *ptr = newNode(0);
     struct Node *dummy = ptr;
     int carry = 0;
     while (list1 || list2 || carry)
@@ -47,7 +55,7 @@ struct Node *AddTwoNumbers(struct Node *list1, struct Node *list2)
         }
         sum += carry;
         carry = sum / 10;
-        struct Node *node = new Node(sum % 10);
+        struct Node *node = newNode(sum % 10);
         ptr->next = node;
         ptr = ptr->next;
     }
