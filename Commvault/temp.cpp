@@ -1,83 +1,71 @@
 #include <bits/stdc++.h>
-#include <memory>
 using namespace std;
 // JAI SHREE RAM
 // HAR HAR MAHADEV
-struct Node
+#define ll long long int
+#define f(i, a, b) for (ll i = a; i < b; i++)
+#define rf(i, a, b) for (ll i = a; i >= b; i--)
+#define mp make_pair
+#define pb push_back
+#define vll vector<ll>
+#define pll pair<ll, ll>
+#define mll map<ll, ll>
+#define vc vector
+#define fi first
+#define se second
+#define all(x) x.begin(), x.end()
+
+void solve()
 {
-    int data;
-    Node *next;
-    Node() : data(0), next(nullptr) {}
-    Node(int x) : data(x), next(nullptr) {}
-    Node(int x, Node *next) : data(x), next(next) {}
-};
-bool checkperfectsquare(int n)
-{
-    if (ceil((double)sqrt(n)) == floor((double)sqrt(n)))
-        return true;
-    else
-        return false;
-}
-int countCustomers(vector<int> bill)
-{
-    int answer = 0;
-    for (int it : bill)
+    int n;
+    string s;
+    cin >> n >> s;
+    int f0 = 0, f1 = 0;
+    for (char c : s)
     {
-        if (checkperfectsquare(it))
-            answer++;
+        f0 += (c == '0');
+        f1 += (c == '1');
     }
-    return answer;
-}
-int main()
-{
-    int n;cin>>n;
-    vector<int>v(n);
-    for(int i=0;i<n;i++) cin>>v[i];
-    cout << countCustomers(v);
+    if (f0 == 0)
+    {
+        cout << n << ' ' << 0 << endl;
+        return;
+    }
+    if (f1 == 0)
+    {
+        cout << n << ' ' << 0 << endl;
+        return;
+    }
+    cout << 1 << ' ' << abs(f0 - f1) + 1 << endl;
+    for (int i = 0, Q = 0; i < abs(f0 - f1); ++i)
+    {
+        string t;
+        for (int j = 0; j < (int)s.size() - 1; ++j)
+            if ((s[j] == '0' && s[j + 1] == '1') || (s[j] == '1' && s[j + 1] == '0'))
+            {
+                Q = j;
+                break;
+            }
+        cout << Q + 1 << ' ' << Q + 2 << ' ' << (f0 > f1) << endl;
+        for (int j = 0; j < (int)s.size(); ++j)
+            if (j != Q && j != Q + 1)
+                t += s[j];
+            else if (j == Q)
+                t += char((f0 > f1) + 48);
+        s = t;
+    }
+    cout << 1 << ' ' << s.size() << ' ' << 0 << endl;
 }
 
-struct Node *newNode(int data)
+int main()
 {
-    struct Node *new_node = new Node();
-    new_node->data = data;
-    new_node->next = NULL;
-    return new_node;
-}
-struct Node *reverseList(struct Node *head)
-{
-    struct Node *curr = NULL;
-    while (head)
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    ll t = 1;
+    cin >> t;
+    while (t--)
     {
-        struct Node *next = head->next;
-        head->next = curr;
-        curr = head;
-        head = next;
+        solve();
     }
-    return curr;
-}
-struct Node *AddTwoNumbers(struct Node *list1, struct Node *list2)
-{
-    struct Node *ptr = newNode(0);
-    struct Node *dummy = ptr;
-    int carry = 0;
-    while (list1 || list2 || carry)
-    {
-        int sum = 0;
-        if (list1 != NULL)
-        {
-            sum += list1->data;
-            list1 = list1->next;
-        }
-        if (list2 != NULL)
-        {
-            sum += list2->data;
-            list2 = list2->next;
-        }
-        sum += carry;
-        carry = sum / 10;
-        struct Node *node = newNode(sum % 10);
-        ptr->next = node;
-        ptr = ptr->next;
-    }
-    return reverseList(dummy->next);
 }
