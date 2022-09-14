@@ -11,11 +11,31 @@ struct Node
     Node(int x) : data(x), next(nullptr) {}
     Node(int x, Node *next) : data(x), next(next) {}
 };
+bool checkperfectsquare(int n)
+{
+    if (ceil((double)sqrt(n)) == floor((double)sqrt(n)))
+        return true;
+    else
+        return false;
+}
+int countCustomers(vector<int> bill)
+{
+    int answer = 0;
+    for (int it : bill)
+    {
+        if (checkperfectsquare(it))
+            answer++;
+    }
+    return answer;
+}
 int main()
 {
-    int m = 107, y = 13;
-    printf((y < 7) ? "%d" : "%c", m);
+    int n;cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++) cin>>v[i];
+    cout << countCustomers(v);
 }
+
 struct Node *newNode(int data)
 {
     struct Node *new_node = new Node();
