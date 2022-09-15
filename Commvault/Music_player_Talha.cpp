@@ -118,17 +118,17 @@ int main()
     shared_ptr<Playlist>
         playlist1 = make_shared<Playlist>(1, "Sad songs");
     playlist1->fun(*user2);
-    // shared_ptr<Music> music1 = make_shared<Music>(1, "Ek lamha", "Azan Sami");
-    // shared_ptr<Music> music2 = make_shared<Music>(2, "Humnava Mere", "Jubin");
-    // shared_ptr<Music> music3 = make_shared<Music>(3, "Your fault", "Excision");
-    // shared_ptr<Music> music4 = make_shared<Music>(4, "There for you", "Martin Garrix");
-    // shared_ptr<Music> music5 = make_shared<Music>(5, "Humnava Mere", "Jubin");
-    // playlist1->addMusic(music1);
-    // playlist1->addMusic(music2);
-    // shared_ptr<Playlist> playlist2 = make_shared<Playlist>(2, "Vibe songs");
-    // playlist2->addMusic(music3);
-    // playlist2->addMusic(music4);
-    // playlist2->addMusic(music5);
-    // playlist1->displayPlaylist();
-    // playlist2->displayPlaylist();
+    shared_ptr<Music> music1 = make_shared<Music>(1, "Ek lamha", "Azan Sami");
+    shared_ptr<Music> music2 = make_shared<Music>(2, "Humnava Mere", "Jubin");
+    shared_ptr<Music> music3 = make_shared<Music>(3, "Your fault", "Excision");
+    shared_ptr<Music> music4 = make_shared<Music>(4, "There for you", "Martin Garrix");
+    shared_ptr<Music> music5 = make_shared<Music>(5, "Humnava Mere", "Jubin");
+    playlist1->addMusic(music1);
+    playlist1->addMusic(music2);
+    shared_ptr<Playlist> playlist2 = make_shared<Playlist>(2, "Vibe songs");
+    playlist2->addMusic(music3);
+    playlist2->addMusic(music4);
+    playlist2->addMusic(music5);
+    playlist1->displayPlaylist();
+    playlist2->displayPlaylist();
 }
