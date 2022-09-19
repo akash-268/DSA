@@ -38,7 +38,7 @@ void findPathHelper(int i, int j, vector<vector<int>> &a, int n, vector<string> 
     // upward
     if (i - 1 >= 0 && !vis[i - 1][j] && a[i - 1][j] == 1)
     {
-        vis[i][j] = 1;
+        vis[i][j] = 1;  
         findPathHelper(i - 1, j, a, n, ans, move + 'U', vis);
         vis[i][j] = 0;
     }
