@@ -36,3 +36,7 @@ string graphColoring(vector<vector<int>> &graph, int m)
     else
         return "NO";
 }
+int main()
+{
+    return 0;
+}
