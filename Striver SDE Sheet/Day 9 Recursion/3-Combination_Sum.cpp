@@ -1,26 +1,45 @@
+// C++ program for the above approach
+
 #include <bits/stdc++.h>
 using namespace std;
-// JAI SHREE RAM
-// HAR HAR MAHADEV
-void solve()
+
+vector<vector<char>> printSubsequences(vector<vector<char>> &res, string s, int index,
+                       vector<char> &subarr, int n)
 {
-    int p = 0, q = 4, r = 5;
-    for (int i = 2; i <= 6; i++)
+    // Print the subsequence when reach
+    // the leaf of recursion tree
+    if (index == n)
     {
-        q = 6 + p;
-        if (3 < q || (p + 9) > (i - p))
+        vector<char> temp;
+        for (auto it : subarr)
         {
-            p = (2 + 11) + q;
-            break;
+            temp.push_back(it);
         }
+        res.push_back(temp);
+        return res;
     }
-    cout << p + q;
+    else
+    {
+        // pick the current index into the subsequence.
+        subarr.push_back(s[index]);
+
+        printSubsequences(res, s, index + 1, subarr, n);
+
+        subarr.pop_back();
+
+        // not picking the element into the subsequence.
+        printSubsequences(res, s, index + 1, subarr, n);
+    }
 }
 
+// Driver Code
 int main()
 {
-    int i = 3;
-    printf("%d", (++i)++);
-    ans += (r - x.second[y])(x.second[y] - l1LL);
+    vector<vector<char>> res;
+    string S = "aabdaabc";
+    int K = 3;
+    vector<char> vec;
+    printSubsequences(res, S, 0, vec, S.size());
+
     return 0;
 }
