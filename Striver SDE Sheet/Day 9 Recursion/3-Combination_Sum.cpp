@@ -6,8 +6,6 @@ using namespace std;
 vector<vector<char>> printSubsequences(vector<vector<char>> &res, string s, int index,
                        vector<char> &subarr, int n)
 {
-    // Print the subsequence when reach
-    // the leaf of recursion tree
     if (index == n)
     {
         vector<char> temp;
@@ -20,7 +18,6 @@ vector<vector<char>> printSubsequences(vector<vector<char>> &res, string s, int 
     }
     else
     {
-        // pick the current index into the subsequence.
         subarr.push_back(s[index]);
 
         printSubsequences(res, s, index + 1, subarr, n);
