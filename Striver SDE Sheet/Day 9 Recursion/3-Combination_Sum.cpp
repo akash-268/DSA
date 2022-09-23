@@ -1,42 +1,45 @@
-// C++ program for the above approach
-
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<vector<char>> printSubsequences(vector<vector<char>> &res, string s, int index,
-                       vector<char> &subarr, int n)
+bool isPrime(int n)
 {
-    if (index == n)
-    {
-        vector<char> temp;
-        for (auto it : subarr)
-        {
-            temp.push_back(it);
-        }
-        res.push_back(temp);
-        return res;
-    }
-    else
-    {
-        subarr.push_back(s[index]);
+    if (n <= 1)
+        return false;
+    if (n <= 3)
+        return true;
+    if (n % 2 == 0 || n % 3 == 0)
+        return false;
 
-        printSubsequences(res, s, index + 1, subarr, n);
+    for (int i = 5; i * i <= n; i = i + 6)
+        if (n % i == 0 || n % (i + 2) == 0)
+            return false;
 
-        subarr.pop_back();
-
-        // not picking the element into the subsequence.
-        printSubsequences(res, s, index + 1, subarr, n);
-    }
+    return true;
 }
-
-// Driver Code
+int solve(int n)
+{
+    int sum = 0;
+    int root_n = (int)sqrt(n);
+    for (int i = 1; i <= root_n; i++)
+    {
+        if (n % i == 0)
+        {
+            if (i == n / i && isPrime(i))
+                sum += i;
+            else
+            {
+                if (isPrime(i))
+                    sum += i;
+                if (isPrime(n / i))
+                    sum += (n / i);
+            }
+        }
+    }
+    return sum;
+}
 int main()
 {
-    vector<vector<char>> res;
-    string S = "aabdaabc";
-    int K = 3;
-    vector<char> vec;
-    printSubsequences(res, S, 0, vec, S.size());
-
-    return 0;
+    int n;
+    cin >> n;
+    cout << solve(n);
 }
