@@ -1,30 +1,39 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
 using namespace std;
-struct TreeNode
-{
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
-TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
-{
-    if (root == NULL || root == p || root == q)
-        return root;
 
-    TreeNode *left = lowestCommonAncestor(root->left, p, q);
-    TreeNode *right = lowestCommonAncestor(root->right, p, q);
-    if (left == NULL)
-        return right;
-    else if (right == NULL)
-        return left;
-    else
-        return root;
+string breakPalindrome(string s)
+{
+    string temp = s;
+    bool changed = false;
+    if (s.size() == 1)
+        return "";
+    int i = 0, j = s.size() - 1;
+    bool leftA = true;
+    bool rightA = true;
+    while (i < j)
+    {
+        if (s[i] != 'a')
+        {
+            s[i] = 'a';
+            return s;
+        }
+        i++;
+        j--;
+    }
+    s[s.size() - 1] = 'b';
+    int x = s.compare(temp);
+    if (x)
+        return "IMPOSSIBLE";
+    return s;
 }
 
 int main()
 {
-    
+
+    cout << breakPalindrome("aaa");
+
+    return 0;
 }
