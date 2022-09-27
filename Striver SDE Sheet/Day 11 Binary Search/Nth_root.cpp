@@ -33,7 +33,8 @@ void getNthRoot(int n, int m)
 }
 int main()
 {
-    int n = 3, m = 27;
+    int n,m;
+    cin>>n>>m;
     getNthRoot(n, m);
     return 0;
 }
