@@ -59,20 +59,30 @@ vector<vector<int>> combinationSum(vector<int> &nums, int target)
     solve(nums, 0, temp, target);
     return ans;
 }
-int moveApples(int input1, int input2[])
+void solve()
 {
-    long long avg = 0;
-    for (int i = 0; i < input1; i++)
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
+        cin >> v[i];
+    int k;
+    cin >> k;
+    vector<vector<int>> res = combinationSum(v, k);
+    for (auto it : res)
     {
-        avg += input2[i];
+        cout << "[";
+        for (int i = 0; i < it.size(); i++)
+        {
+            if (i == it.size() - 1)
+            {
+                cout << it[i];
+            }
+            else
+                cout << it[i] << ",";
+        }
+        cout << "] ";
     }
-    avg /= input1;
-    long long temp = 0;
-    for (int i = 0; i < input1; i++)
-    {
-        temp += abs(input2[i] - avg);
-    }
-    return temp / 2;
 }
 
 int main()
@@ -82,6 +92,8 @@ int main()
     cout.tie(0);
     ll t = 1;
     // cin >> t;
-    int arr[2] = {1, 3};
-    cout << moveApples(2, arr);
+    while (t--)
+    {
+        solve();
+    }
 }
