@@ -15,7 +15,9 @@ using namespace std;
 #define se second
 #define all(x) x.begin(), x.end()
 
-
+int solve(string s,int k,string words[],int cost[]){
+    
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
