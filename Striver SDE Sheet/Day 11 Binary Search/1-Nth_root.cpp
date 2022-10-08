@@ -29,7 +29,7 @@ void getNthRoot(int n, int m)
         }
     }
 
-    cout << n << "th root of " << m << " is " << low << endl;
+    cout << low << endl;
 }
 int main()
 {
