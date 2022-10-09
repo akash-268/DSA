@@ -40,6 +40,49 @@ void solve()
 {
 }
 
+bool check(vector<int> &a, int b, int mid)
+{
+    int alloc = 0, pages = 0;
+    for (int i = 0; i < a.size(); i++)
+    {
+        if (a[i] > mid)
+            return false;
+        if (pages + a[i] > mid)
+        {
+            alloc++;
+            pages = a[i];
+        }
+        else
+            pages += a[i];
+    }
+    if (alloc < b)
+        return true;
+    return false;
+}
+int books(vector<int> &A, int B)
+{
+    if (A.size() < B)
+        return -1;
+    int res = -1;
+    int low = A[0], high = 0;
+    for (int i = 0; i < A.size(); i++)
+    {
+        high = high + A[i];
+        low = min(low, A[i]);
+    }
+    while (low <= high)
+    {
+        int mid = (low + high) >> 1;
+        if (check(A, B, mid))
+        {
+            res = mid;
+            high = mid - 1;
+        }
+        else
+            low = mid + 1;
+    }
+    return res;
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
