@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 // JAI SHREE RAM
@@ -37,9 +36,7 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
-void solve()
-{
-}
+
 int findKthLargest(vector<int> &nums, int k)
 {
     priority_queue<int, vector<int>> pq;
@@ -58,10 +55,9 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll t = 1;
-    // cin >> t;
-    while (t--)
-    {
-        solve();
-    }
+    int n; cin >> n;
+    vin v(n);
+    f(i, 0, n) cin >> v[i];
+    int k; cin >> k;
+    cout << findKthLargest(v, k);
 }
