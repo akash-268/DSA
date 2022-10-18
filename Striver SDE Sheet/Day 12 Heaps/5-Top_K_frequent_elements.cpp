@@ -37,6 +37,31 @@ struct TreeNode
                       left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
+static bool cmp(pair<int, int> &p1, pair<int, int> &p2)
+{
+    return p1.second > p2.second;
+}
+vector<int> topKFrequent(vector<int> &nums, int k)
+{
+    map<int, int> mp;
+    for (auto it : nums)
+    {
+        mp[it]++;
+    }
+    vector<pair<int, int>> v;
+    for (auto it : mp)
+    {
+        v.push_back({it.first, it.second});
+    }
+    vector<int> ans;
+    int i = 0;
+    sort(v.begin(), v.end(), cmp);
+    while (k--)
+    {
+        ans.push_back(v[i++].first);
+    }
+    return ans;
+}
 void solve()
 {
 }
