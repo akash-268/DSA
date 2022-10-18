@@ -64,6 +64,16 @@ vector<int> topKFrequent(vector<int> &nums, int k)
 }
 void solve()
 {
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
+        cin >> v[i];
+    int k;
+    cin >> k;
+    vector<int> res = topKFrequent(v, k);
+    for (auto it : res)
+        cout << it << " ";
 }
 
 int main()
