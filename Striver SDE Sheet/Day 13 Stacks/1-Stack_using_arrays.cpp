@@ -58,3 +58,9 @@ public:
         return tp == n;
     }
 };
+
+int main()
+{
+
+    return 0;
+}
