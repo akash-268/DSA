@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+using namespace std;
 class Queue
 {
     int *arr;
@@ -60,3 +61,8 @@ public:
         return -1;
     }
 };
+
+int main()
+{
+    return 0;
+}
