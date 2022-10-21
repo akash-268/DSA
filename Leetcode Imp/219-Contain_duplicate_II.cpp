@@ -37,8 +37,46 @@ struct TreeNode
                       left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
+bool containsNearbyDuplicate(vector<int> &nums, int k)
+{
+    map<int, vector<int>> mp;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        mp[nums[i]].push_back(i);
+    }
+    int flag = 0;
+    for (auto it : mp)
+    {
+        if (it.second.size() > 1)
+        {
+            vector<int> v = it.second;
+            for (int i = v.size() - 1; i >= 1; i--)
+            {
+                if (v[i] - v[i - 1] <= k)
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+        }
+    }
+    if (flag)
+        return true;
+    return false;
+}
 void solve()
 {
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
+        cin >> v[i];
+    int k;
+    cin >> k;
+    if (containsNearbyDuplicate(v, k))
+        cout << "True" << endl;
+    else
+        cout << "False" << endl;
 }
 
 int main()
