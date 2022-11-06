@@ -1,46 +1,32 @@
 #include <bits/stdc++.h>
-
 using namespace std;
-
-map<char, int> mp;
-
-bool static comp(string &s1, string &s2)
-{ 
-    int m = s1.length();
-    int n = s2.length();
-    for (int i = 0; i < min(m, n); i++)
+// JAI SHREE RAM
+// HAR HAR MAHADEV
+int solve(vector<int> &a)
+{
+    sort(a.begin(),a.end());
+    int n = a.size();
+    vector<int> temp;
+    temp.push_back(a[0] + a[1]);
+    for (int i = 2; i < n; i++)
     {
-        if (mp[s1[i]] == mp[s2[i]])
-            continue;
-        else if (mp[s1[i]] < mp[s2[i]])
-            return true;
-        else
-            return false;
+        int x = temp[temp.size() - 1];
+        temp.push_back(x + a[i]);
     }
-    if (s1.length() < s2.length())
-        return true;
-    else
-        return false;
+    int sum = 0;
+    for (auto it : temp)
+    {
+        sum += it;
+    }
+    return sum;
 }
+
 int main()
 {
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        string s;
-        cin >> s;
-        for (int i = 0; i < s.length(); i++)
-            mp[s[i]] = i + 1;
-        int n;
-        cin >> n;
-        vector<string> vec(n);
-        for (int i = 0; i < n; i++)
-            cin >> vec[i];
-        sort(vec.begin(), vec.end(), comp);
-        for (int i = 0; i < n; i++)
-            cout << vec[i] << endl;
-        mp.clear();
-    }
-    return 0;
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
+        cin >> v[i];
+    cout << solve(v);
 }

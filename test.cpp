@@ -12,14 +12,17 @@ int solve(string s)
             vis[i] = 0;
     }
     int c = 0;
-    for (int i = 0; i < n - 2; i++)
+    for (int i = 0; i < n; i++)
     {
         if (s[i] == 'X' && vis[i] == 0)
         {
             c++;
-            vis[i] = 1;
-            vis[i + 1] = 1;
-            vis[i + 2] = 1;
+            if (i < n)
+                vis[i] = 1;
+            if (i + 1 < n)
+                vis[i + 1] = 1;
+            if (i + 2 < n)
+                vis[i + 2] = 1;
         }
     }
     return c;
